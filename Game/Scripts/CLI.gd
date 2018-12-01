@@ -7,6 +7,9 @@ const MAX_PLAYERS = 1
 var text = []
 
 func _ready():
+	
+	get_tree().connect("network_peer_connected", self, "_player_connected")
+	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	var peer = NetworkedMultiplayerENet.new()
@@ -14,33 +17,8 @@ func _ready():
 	get_tree().set_network_peer(peer)
 	print(IP.get_local_addresses())
 	text.append("Server's ip address: ")
-	text.append("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 	for address in IP.get_local_addresses():
 		if(not ":" in address):
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
-			text.append(address)
 			text.append(address)
 	refresh()
 
