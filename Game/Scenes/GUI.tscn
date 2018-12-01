@@ -6,13 +6,13 @@
 [sub_resource type="DynamicFont" id=1]
 
 size = 34
+outline_size = 0
+outline_color = Color( 1, 1, 1, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )
-_sections_unfolded = [ "Font", "Settings" ]
 
-[node name="GUI" type="Container" index="0"]
-
+[node name="GUI" type="Container"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -24,8 +24,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="Label" type="Label" parent="." index="0"]
-
+[node name="Label" type="Label" parent="."]
 anchor_left = 0.5
 anchor_top = 0.0
 anchor_right = 0.5
@@ -48,10 +47,8 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Anchor", "Margin", "custom_colors", "custom_constants", "custom_fonts" ]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." index="1"]
-
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -68,10 +65,8 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
 script = ExtResource( 2 )
-_sections_unfolded = [ "Rect" ]
 
-[node name="CLI" type="Button" parent="VBoxContainer" index="0"]
-
+[node name="CLI" type="Button" parent="VBoxContainer"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -92,10 +87,8 @@ group = null
 text = "CLI"
 flat = false
 align = 1
-_sections_unfolded = [ "Pause" ]
 
-[node name="Visual" type="Button" parent="VBoxContainer" index="1"]
-
+[node name="Visual" type="Button" parent="VBoxContainer"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -118,8 +111,7 @@ text = "Visual"
 flat = false
 align = 1
 
-[node name="Exit" type="Button" parent="VBoxContainer" index="2"]
-
+[node name="Exit" type="Button" parent="VBoxContainer"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -143,9 +135,5 @@ flat = false
 align = 1
 
 [connection signal="pressed" from="VBoxContainer/CLI" to="VBoxContainer" method="_on_CLI_pressed"]
-
 [connection signal="pressed" from="VBoxContainer/Visual" to="VBoxContainer" method="_on_Visual_pressed"]
-
 [connection signal="pressed" from="VBoxContainer/Exit" to="VBoxContainer" method="_on_Exit_pressed"]
-
-
