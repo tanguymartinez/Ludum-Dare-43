@@ -92,7 +92,6 @@ group = null
 text = "Play"
 flat = false
 align = 1
-_sections_unfolded = [ "Anchor", "Margin", "Rect" ]
 
 [node name="Exit" type="Button" parent="VBoxContainer" index="1"]
 
