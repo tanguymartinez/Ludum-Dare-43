@@ -6,6 +6,7 @@ const MAX_PLAYERS = 1
 # Player info, associate ID to data
 var text = []
 var player_id
+var player_ip_address
 
 func _ready():
 	
@@ -27,6 +28,7 @@ func _ready():
 func _player_connected(id):
 	player_id = id
 	print("Player connected...") # Will go unused, not useful here
+	print_text("Player "+id+" is connected...")
 
 func _player_disconnected(id):
 	print("Player disconnected...") # Erase player from info
@@ -37,10 +39,16 @@ func refresh():
 		string += line + "\n"
 	$"CLI".text = string
 
-remote func send_text(text):
-	text.append(text)
+func print_text(string):
+	text.append(string)
 	refresh()
 
 func _on_Button_pressed():
-	rpc("send_text", $"LineEdit".text)
-	rpc_id(player_id, "send_text", $"LineEdit".text)
+	var string = $"LineEdit".text
+	print_text(string)
+	rpc_id(player_id, "send_text", string)
+	$"LineEdit".clear()
+
+remote func store_ip_address(address):
+	player_ip_address = address
+	print_text(player_ip_address)

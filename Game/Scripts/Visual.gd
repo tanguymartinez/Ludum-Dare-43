@@ -20,5 +20,9 @@ func _connected_fail():
 func _server_disconnected():
 	print("Server kicked us...")
 
+func _connected_ok():
+	print("Connected to server...")
+	rpc_id(1, "store_ip_address", IP.get_local_addresses()[0])
+
 remote func send_text(text):
 	print(text)
