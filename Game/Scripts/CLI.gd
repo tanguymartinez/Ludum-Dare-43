@@ -14,6 +14,7 @@ func _ready():
 	# Initialization here
 	var peer = NetworkedMultiplayerENet.new()
 	peer.create_server(SERVER_PORT, MAX_PLAYERS)
+	
 	get_tree().set_network_peer(peer)
 	print(IP.get_local_addresses())
 	text.append("Server's ip address: ")
