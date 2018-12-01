@@ -48,6 +48,10 @@ func _on_Button_pressed():
 	rpc_id(player_id, "send_text", string)
 	$"LineEdit".clear()
 
+func _process(delta):
+	if(Input.is_action_just_pressed("ui_accept")):
+		_on_Button_pressed()
+
 remote func store_ip_address(address):
 	player_ip_address = address
 	text[text.size()-1] += " with ip address " + player_ip_address + "..."

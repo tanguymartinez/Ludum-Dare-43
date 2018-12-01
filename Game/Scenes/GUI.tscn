@@ -92,6 +92,7 @@ group = null
 text = "CLI"
 flat = false
 align = 1
+_sections_unfolded = [ "Pause" ]
 
 [node name="Visual" type="Button" parent="VBoxContainer" index="1"]
 

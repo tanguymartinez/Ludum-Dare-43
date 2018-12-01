@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/CLI.gd" type="Script" id=1]
 [ext_resource path="res://res/mononoki.ttf" type="DynamicFontData" id=2]
@@ -75,6 +75,16 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Resource", "Settings" ]
+
+[sub_resource type="InputEventAction" id=5]
+
+device = 0
+action = "ui_accept"
+pressed = true
+
+[sub_resource type="ShortCut" id=6]
+
+shortcut = SubResource( 5 )
 
 [node name="GUI" type="Container"]
 
@@ -193,7 +203,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 toggle_mode = false
 enabled_focus_mode = 2
-shortcut = null
+shortcut = SubResource( 6 )
 group = null
 text = "Send"
 flat = false
