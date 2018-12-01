@@ -1,12 +1,12 @@
-extends Container
+extends Node2D
 
 const SERVER_PORT = 1337
 const MAX_PLAYERS = 1
 
 # Player info, associate ID to data
 var text = []
-var player_id
-var player_ip_address
+onready var player_id
+onready var player_ip_address
 
 func _ready():
 	
@@ -36,17 +36,17 @@ func refresh():
 	var string = ""
 	for line in text:
 		string += line + "\n"
-	$"CLI".text = string
+	$"GUI/CLI".text = string
 
 func print_text(string):
 	text.append(string)
 	refresh()
 
 func _on_Button_pressed():
-	var string = $"LineEdit".text
+	var string = $"GUI/LineEdit".text
 	print_text(string)
 	rpc_id(player_id, "send_text", string)
-	$"LineEdit".clear()
+	$"GUI/LineEdit".clear()
 
 func _process(delta):
 	if(Input.is_action_just_pressed("ui_accept")):
