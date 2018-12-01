@@ -13,7 +13,10 @@ func _ready():
 	peer.create_server(SERVER_PORT, MAX_PLAYERS)
 	get_tree().set_network_peer(peer)
 	print(IP.get_local_addresses())
-	text.append("Server's ip address: " + IP.get_local_addresses()[0])
+	text.append("Server's ip address: ")
+	for address in IP.get_local_addresses():
+		if(not ":" in address):
+			text.append(address)
 	refresh()
 
 func _player_connected(id):
