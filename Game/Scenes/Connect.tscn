@@ -11,7 +11,7 @@ use_filter = true
 font_data = ExtResource( 1 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="GUI" type="Container"]
+[node name="GUI" type="Container" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -24,7 +24,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="Label" type="Label" parent="." index="0"]
+[node name="Visual" type="Label" parent="." index="0"]
 
 anchor_left = 0.5
 anchor_top = 0.0
@@ -42,7 +42,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Ludum Dare 43"
+text = "Visual View"
 align = 1
 valign = 1
 percent_visible = 1.0
@@ -59,7 +59,7 @@ anchor_bottom = 0.5
 margin_left = -50.0
 margin_top = -22.0
 margin_right = 50.0
-margin_bottom = 22.0
+margin_bottom = -2.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -70,14 +70,37 @@ alignment = 0
 script = ExtResource( 2 )
 _sections_unfolded = [ "Rect" ]
 
-[node name="CLI" type="Button" parent="VBoxContainer" index="0"]
+[node name="Address" type="LineEdit" parent="VBoxContainer" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 100.0
-margin_bottom = 20.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+focus_mode = 2
+context_menu_enabled = true
+placeholder_alpha = 0.6
+caret_blink = false
+caret_blink_speed = 0.65
+caret_position = 0
+
+[node name="Connect" type="Button" parent="VBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 28.0
+margin_right = 100.0
+margin_bottom = 48.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -89,62 +112,10 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "CLI"
+text = "Connect"
 flat = false
 align = 1
 
-[node name="Visual" type="Button" parent="VBoxContainer" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 24.0
-margin_right = 100.0
-margin_bottom = 44.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Visual"
-flat = false
-align = 1
-
-[node name="Exit" type="Button" parent="VBoxContainer" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 48.0
-margin_right = 100.0
-margin_bottom = 68.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Exit"
-flat = false
-align = 1
-
-[connection signal="pressed" from="VBoxContainer/CLI" to="VBoxContainer" method="_on_CLI_pressed"]
-
-[connection signal="pressed" from="VBoxContainer/Visual" to="VBoxContainer" method="_on_Visual_pressed"]
-
-[connection signal="pressed" from="VBoxContainer/Exit" to="VBoxContainer" method="_on_Exit_pressed"]
+[connection signal="pressed" from="VBoxContainer/Connect" to="VBoxContainer" method="_on_Connect_pressed"]
 
 
