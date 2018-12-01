@@ -1,6 +1,6 @@
 # Typical lobby implementation, imagine this being in /root/lobby
 
-extends Container
+extends Node2D
 
 
 const SERVER_PORT = 1337
