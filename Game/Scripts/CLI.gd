@@ -5,6 +5,7 @@ const MAX_PLAYERS = 1
 
 # Player info, associate ID to data
 var text = []
+var player_id
 
 func _ready():
 	
@@ -24,6 +25,7 @@ func _ready():
 	refresh()
 
 func _player_connected(id):
+	player_id = id
 	print("Player connected...") # Will go unused, not useful here
 
 func _player_disconnected(id):
@@ -35,7 +37,10 @@ func refresh():
 		string += line + "\n"
 	$"CLI".text = string
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+remote func send_text(text):
+	text.append(text)
+	refresh()
+
+func _on_Button_pressed():
+	rpc("send_text", $"LineEdit".text)
+	rpc_id(player_id, "send_text", $"LineEdit".text)

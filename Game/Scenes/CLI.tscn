@@ -158,7 +158,7 @@ anchor_bottom = 0.5
 margin_left = -200.0
 margin_top = 202.0
 margin_right = 200.0
-margin_bottom = 12.0
+margin_bottom = 226.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -199,5 +199,7 @@ text = "Send"
 flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Rect" ]
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
 
 

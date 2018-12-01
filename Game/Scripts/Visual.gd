@@ -20,5 +20,5 @@ func _connected_fail():
 func _server_disconnected():
 	print("Server kicked us...")
 
-remote func register_player(id, info):
-	pass
+remote func send_text(text):
+	print(text)

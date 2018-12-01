@@ -24,5 +24,6 @@ func _on_Visual_pressed():
 
 
 func _on_Connect_pressed():
-	Variables.IpAddress = $"Address".text
-	get_tree().change_scene("res://Scenes/Visual.tscn")
+	if $"Address".text.is_valid_ip_address():
+		Variables.IpAddress = $"Address".text
+		get_tree().change_scene("res://Scenes/Visual.tscn")
