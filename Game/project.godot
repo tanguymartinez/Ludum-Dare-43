@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Ludum Dare 43"
-config/icon="res://res/sand.png"
+config/icon="res://res/Img/sand.png"
 
 [autoload]
 
