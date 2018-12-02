@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/1.png-a247a8bba2a09631da8396e95d7a3ff3.stex"
+path="res://.import/character_crying.png-076596f940280155f289f851be3a1370.stex"
 
 [deps]
 
-source_file="res://res/Img/Tiles/1.png"
-dest_files=[ "res://.import/1.png-a247a8bba2a09631da8396e95d7a3ff3.stex" ]
+source_file="res://res/Img/Tiles/Player/character_crying.png"
+dest_files=[ "res://.import/character_crying.png-076596f940280155f289f851be3a1370.stex" ]
 
 [params]
 
