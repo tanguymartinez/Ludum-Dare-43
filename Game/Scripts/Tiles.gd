@@ -12,6 +12,7 @@ var map = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	files = list_files_in_directory(PATH_TO_GROUND)
+	files.sort()
 	for file in files:
 		var instance = default_tile_scene.instance()
 		var image = Image.new()
