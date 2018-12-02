@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sand-up.png-71fb518dabb769d07ec668a2f5d7bb3e.stex"
+path="res://.import/4.png-ef1418af3da36faed3859b09e0d379e8.stex"
 
 [deps]
 
-source_file="res://res/Img/sand-up.png"
-dest_files=[ "res://.import/sand-up.png-71fb518dabb769d07ec668a2f5d7bb3e.stex" ]
+source_file="res://res/Img/Tiles/4.png"
+dest_files=[ "res://.import/4.png-ef1418af3da36faed3859b09e0d379e8.stex" ]
 
 [params]
 
