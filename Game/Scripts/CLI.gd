@@ -5,8 +5,8 @@ const MAX_PLAYERS = 1
 
 # Player info, associate ID to data
 var text = []
-onready var player_id
-onready var player_ip_address
+var player_id
+var player_ip_address
 
 func _ready():
 	
