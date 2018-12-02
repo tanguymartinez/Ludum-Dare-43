@@ -20,11 +20,13 @@ func _ready():
 		texture.create_from_image(image, 1)
 		instance.texture = texture
 		tiles_scn.append(instance)
+	init_map()
 
 func init_map():
-	for i in range(GRID_WIDTH):
-		map[i] = []
-		for j in range(GRID_HEIGHT):
+	for i in range(GRID_WIDTH-1):
+		map.append([])
+		for j in range(GRID_HEIGHT-1):
+			map[i].append("")
 			if (i+j) == 0:
 				map[i][j] = tiles_scn[5]
 			elif i == GRID_WIDTH-1 and j == GRID_HEIGHT-1:
@@ -44,7 +46,7 @@ func init_map():
 			else:
 				map[i][j] = tiles_scn[8]
 	for i in range(map.size()-1):
-		for j in range(map[0].size()):
+		for j in range(map[0].size()-1):
 			map[i][j].position = Vector2(i*100, j*100)
 			self.add_child(map[i][j])
 
