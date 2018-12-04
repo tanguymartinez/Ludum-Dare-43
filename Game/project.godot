@@ -27,6 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Ludum Dare 43"
+run/main_scene="res://Scenes/GUI.tscn"
 config/icon="res://res/Img/Tiles/Ground/8.png"
 
 [autoload]
