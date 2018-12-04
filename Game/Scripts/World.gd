@@ -10,7 +10,6 @@ export(PackedScene) var overlay
 export(PackedScene) var player
 export(PackedScene) var hint
 var player_instance
-var player_pos
 var tiles_scn = [] #TO-DO implement getter to remove duplicate duplicate
 var map = [] #map of actual node instances
 var tile_hovered = Vector2(0, 0)
@@ -18,7 +17,6 @@ var direction_hints = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player_pos = Vector2(0, 0)
 	player_instance = player.instance()
 	
 	files = list_files_in_directory(PATH_TO_GROUND)
@@ -119,10 +117,13 @@ func in_bounds(pos, width, height):
 
 func _on_Player_clicked():
 	print("clicked")
+	generate_direction_hints()
 	
 func generate_direction_hints():
-	var pos = player_instance.get_node("../").position
+	var pos = get_map_index(player_instance.get_node("../").position)
 	var top
 	var right
 	var bottom
 	var left
+	for child in map[pos.y][pos.x].get_children():
+		if "group" in child and child.get("group") == 
