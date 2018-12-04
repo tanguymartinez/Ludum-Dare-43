@@ -7,6 +7,7 @@ const MAX_PLAYERS = 1
 var text = []
 var player_id
 var player_ip_address
+var player_infos = []
 
 func _ready():
 	
@@ -56,3 +57,5 @@ remote func store_ip_address(address):
 	player_ip_address = address
 	text[text.size()-1] += " with ip address " + player_ip_address + "..."
 	refresh()
+	
+remote func store_player_info(infos):

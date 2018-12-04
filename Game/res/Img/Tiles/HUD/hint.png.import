@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/character_dead.png-a67df92721d6c8834961441a3afc38a0.stex"
+path="res://.import/hint.png-b24234136be4191008675d8ca75d032b.stex"
 
 [deps]
 
-source_file="res://res/Img/Tiles/Player/character_dead.png"
-dest_files=[ "res://.import/character_dead.png-a67df92721d6c8834961441a3afc38a0.stex" ]
+source_file="res://res/Img/Tiles/HUD/hint.png"
+dest_files=[ "res://.import/hint.png-b24234136be4191008675d8ca75d032b.stex" ]
 
 [params]
 
@@ -17,7 +17,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

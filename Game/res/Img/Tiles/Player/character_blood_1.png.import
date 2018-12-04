@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/character_dead.png-a67df92721d6c8834961441a3afc38a0.stex"
+path="res://.import/character_blood_1.png-a6fb68aa56a5f926cdbd583f978386c5.stex"
 
 [deps]
 
-source_file="res://res/Img/Tiles/Player/character_dead.png"
-dest_files=[ "res://.import/character_dead.png-a67df92721d6c8834961441a3afc38a0.stex" ]
+source_file="res://res/Img/Tiles/Player/character_blood_1.png"
+dest_files=[ "res://.import/character_blood_1.png-a6fb68aa56a5f926cdbd583f978386c5.stex" ]
 
 [params]
 
