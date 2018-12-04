@@ -3,8 +3,8 @@ var group setget ,get_group
 
 func _init(grp):
 	for group in groups:
-		if groups[group] == grp:
-			self.group = group
+		if group == grp:
+			self.group = groups[group]
 		else:
 			print("Wrong group supplied!")
 			self.group = null

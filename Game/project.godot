@@ -20,8 +20,8 @@ config/icon="res://res/Img/Tiles/Ground/8.png"
 
 [autoload]
 
-Variables="*res://Scripts/Variables.gd"
 Classes="*res://Scripts/Classes.gd"
+Variables="*res://Scripts/Variables.gd"
 
 [display]
 
