@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Classes",
+"language": "GDScript",
+"path": "res://Scripts/Classes.gd"
+}, {
+"base": "Node2D",
+"class": "Variables",
+"language": "GDScript",
+"path": "res://Scripts/Variables.gd"
+} ]
 _global_script_class_icons={
-
+"Classes": "",
+"Variables": ""
 }
 
 [application]
