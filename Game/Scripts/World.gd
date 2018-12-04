@@ -12,7 +12,7 @@ export(PackedScene) var hint
 var player_instance
 var player_pos
 var tiles_scn = [] #TO-DO implement getter to remove duplicate duplicate
-var map = []
+var map = [] #map of actual node instances
 var tile_hovered = Vector2(0, 0)
 var direction_hints = []
 

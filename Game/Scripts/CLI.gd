@@ -59,3 +59,4 @@ remote func store_ip_address(address):
 	refresh()
 	
 remote func store_player_info(infos):
+	pass

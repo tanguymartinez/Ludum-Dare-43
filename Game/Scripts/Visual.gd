@@ -2,7 +2,6 @@
 
 extends Node2D
 
-
 const SERVER_PORT = 1337
 # Connect all functions
 
