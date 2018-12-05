@@ -10,9 +10,9 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
-"class": "Classes",
+"class": "Groups",
 "language": "GDScript",
-"path": "res://Scripts/Classes.gd"
+"path": "res://Scripts/Groups.gd"
 }, {
 "base": "Node2D",
 "class": "Variables",
@@ -20,7 +20,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Variables.gd"
 } ]
 _global_script_class_icons={
-"Classes": "",
+"Groups": "",
 "Variables": ""
 }
 
@@ -32,8 +32,8 @@ config/icon="res://res/Img/Tiles/Ground/8.png"
 
 [autoload]
 
-Classes="*res://Scripts/Classes.gd"
 Variables="*res://Scripts/Variables.gd"
+Groups="*res://Scripts/Groups.gd"
 
 [display]
 

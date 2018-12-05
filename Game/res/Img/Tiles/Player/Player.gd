@@ -6,7 +6,7 @@ extends Area2D
 signal player_clicked(pos)
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	add_to_group(str(Groups.ALLY))
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and Input.is_action_pressed("ui_click"):

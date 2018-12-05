@@ -119,11 +119,17 @@ func _on_Player_clicked():
 	print("clicked")
 	generate_direction_hints()
 	
+func empty(nodes):
+	for child in nodes:
+		if not Groups.empty(child):
+			return false
+	return true
+	
 func generate_direction_hints():
 	var pos = get_map_index(player_instance.get_node("../").position)
 	var top
 	var right
 	var bottom
 	var left
-	for child in map[pos.y][pos.x].get_children():
-		if "group" in child and child.get("group") == 
+	if empty(map[pos.y][pos.x].get_children()):
+		pass
