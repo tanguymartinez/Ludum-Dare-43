@@ -27,3 +27,6 @@ func _on_Connect_pressed():
 	if $"Address".text.is_valid_ip_address():
 		Variables.IpAddress = $"Address".text
 		get_tree().change_scene("res://Scenes/Visual.tscn")
+
+func _on_Button_pressed():
+	pass # Replace with function body.

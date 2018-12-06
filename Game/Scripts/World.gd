@@ -26,6 +26,7 @@ var player_instance
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player_instance = player.instance()
+	player_instance.find_node("Area2D").connect("player_clicked", self, "_on_Player_clicked")
 	
 	files = list_files_in_directory(PATH_TO_GROUND)
 	files.sort()
@@ -107,7 +108,6 @@ func get_map_index(pos):
 #PARAM pos: Vector2
 func spawn_player(pos):
 	var indexes = get_map_index(pos)
-	player_instance.find_node("Area2D").connect("player_clicked", self, "_on_Player_clicked")
 	map[indexes.y][indexes.x].add_child(player_instance)
 
 #Updates position of the selection tile
@@ -172,3 +172,4 @@ func generate_direction_hints(length):
 					hint_instance.position = Vector2(offset.x * index * PIXELS, offset.y * index * PIXELS)
 					direction_hints.append(hint_instance)
 					player_instance.get_node("Hints").add_child(hint_instance)
+
