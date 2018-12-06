@@ -11,7 +11,8 @@ static func get_group_name(key):
 		return key
 	return null
 	
-static func empty(node):
+#Returns TRUE if node is blocking
+static func blocking(node):
 	for group in node.get_groups():
 		if int(group) in COLLIDER.values():
 			return false
