@@ -1,11 +1,11 @@
 extends Node2D
 
+
 #Constants
 const GRID_WIDTH = 15
 const GRID_HEIGHT = 10
 const PIXELS = 100
 const PATH_TO_GROUND = "res://res/Img/Tiles/Ground"
-var files = []
 
 #Exports
 export(PackedScene) var default_tile_scene
@@ -14,6 +14,7 @@ export(PackedScene) var player
 export(PackedScene) var hint
 
 #map related
+var files = []
 var tiles_scn = [] #TO-DO implement getter to remove duplicate duplicate
 var map = [] #map of actual node instances
 var tile_hovered = Vector2(0, 0)
@@ -110,6 +111,38 @@ func spawn_player(pos):
 	var indexes = get_map_index(pos)
 	map[indexes.y][indexes.x].add_child(player_instance)
 
+#Moves the player of <dir> tiles
+#PARAM dir : Vector2
+func move_player(dir):
+	if not direction_hints.empty():
+		var player_pos = player_instance.get_node("../").position
+		
+
+#Hide and remove direction hints
+func remove_direction_hints():
+	for i in range(0, player_instance.get_node("Hints").get_child_count()):
+		player_instance.get_node("Hints").get_child(i).queue_free()
+
+#Generate and display direction hints of distance <length>
+#PARAM length : int
+func generate_direction_hints(length):
+	var pos = get_map_index(player_instance.get_node("../").position)
+	for index in range(1, length+1):
+		for offset in direction_offsets:
+			var blocking = false
+			if in_bounds(Vector2(pos.x + offset.x * index, pos.y + offset.y * index), map[0].size(), map.size()):
+				for node in map[pos.y + offset.y * index][pos.x + offset.x * index].get_children():
+					if Groups.blocking(node):
+						blocking = true	
+				if not blocking:
+					var hint_instance = hint.instance()
+					hint_instance.find_node("Area2D").connect("hint_clicked", self, "_on_Hint_clicked")
+					hint_instance.z_index = 10
+					hint_instance.position = Vector2(offset.x * index * PIXELS, offset.y * index * PIXELS)
+					direction_hints.append(hint_instance)
+					player_instance.get_node("Hints").add_child(hint_instance)
+
+
 #Updates position of the selection tile
 #PARAM pos : Vector2
 func tile_hovered(pos):
@@ -149,27 +182,6 @@ func _on_Player_clicked():
 		direction_hints.clear()
 		remove_direction_hints()
 
-#Hide and remove direction hints
-func remove_direction_hints():
-	for i in range(0, player_instance.get_node("Hints").get_child_count()):
-		player_instance.get_node("Hints").get_child(i).queue_free()
-
-#Generate and display direction hints of distance <length>
-#PARAM length : int
-func generate_direction_hints(length):
-	var pos = get_map_index(player_instance.get_node("../").position)
-	for index in range(1, length+1):
-		for offset in direction_offsets:
-			var blocking = false
-			if in_bounds(Vector2(pos.x + offset.x * index, pos.y + offset.y * index), map[0].size(), map.size()):
-				for node in map[pos.y + offset.y * index][pos.x + offset.x * index].get_children():
-					if Groups.blocking(node):
-						blocking = true	
-				if not blocking:
-					var hint_instance = hint.instance()
-					hint_instance.z_index = 10
-					print(Vector2(offset.y * index * PIXELS, offset.x * index * PIXELS))
-					hint_instance.position = Vector2(offset.x * index * PIXELS, offset.y * index * PIXELS)
-					direction_hints.append(hint_instance)
-					player_instance.get_node("Hints").add_child(hint_instance)
-
+func _on_Hint_clicked(pos):
+	print("ok")
+	move_player(pos)
