@@ -1,5 +1,6 @@
 extends Node2D
 
+#Constants
 const GRID_WIDTH = 15
 const GRID_HEIGHT = 10
 const PIXELS = 100
@@ -39,6 +40,7 @@ func _ready():
 	init_map()
 	toggle_highlight_tile(Vector2(0,0))
 
+#Generate map
 func init_map():
 	for i in range(GRID_HEIGHT):
 		map.append([])
@@ -67,6 +69,9 @@ func init_map():
 			map[i][j].position = Vector2(j*100, i*100)
 			self.get_node("Tiles").add_child(map[i][j])
 
+#List files in a directory
+#PARAM path : String
+#RETURNS array
 func list_files_in_directory(path):
 	var files = []
 	var dir = Directory.new()
@@ -84,21 +89,29 @@ func list_files_in_directory(path):
 	
 	return files
 
+#Triggered when an event is actionned
 func _input(event):
-#   # Mouse in viewport coordinates
+	# Mouse in viewport coordinates
 	if event is InputEventMouseButton and Input.is_action_pressed("ui_click"):
 		spawn_player(event.position)
 	if event is InputEventMouseMotion:
 		tile_hovered(event.position)
 
+#Converts pixels position into map index
+#PARAM pos : Vector2
+#RETURNS Vector2
 func get_map_index(pos):
 	return Vector2(floor(pos.x/PIXELS), floor(pos.y/PIXELS))
 
+#Spawns player at specified pixels location
+#PARAM pos: Vector2
 func spawn_player(pos):
 	var indexes = get_map_index(pos)
 	player_instance.find_node("Area2D").connect("player_clicked", self, "_on_Player_clicked")
 	map[indexes.y][indexes.x].add_child(player_instance)
 
+#Updates position of the selection tile
+#PARAM pos : Vector2
 func tile_hovered(pos):
 	if in_bounds(pos, OS.get_screen_size().x, OS.get_screen_size().y):
 		var indexes = get_map_index(pos)
@@ -106,7 +119,9 @@ func tile_hovered(pos):
 			toggle_highlight_tile(tile_hovered)
 			tile_hovered = indexes
 			toggle_highlight_tile(tile_hovered)
-		
+
+#Toggles the selection tile at the specified map position
+#PARAM pos : Vector2
 func toggle_highlight_tile(pos):
 	if in_bounds(pos, map[0].size(), map.size()):
 		if map[pos.y][pos.x].has_node(overlay.instance().get_name()):
@@ -116,23 +131,31 @@ func toggle_highlight_tile(pos):
 					node.queue_free()
 		else:
 			map[pos.y][pos.x].add_child(overlay.instance())
-	
+
+#Checks whether the position supplied is in the grid of width <width> and height <height>
+#PARAM pos : Vector2
+#PARAM width : int
+#PARAM height : int
 func in_bounds(pos, width, height):
 	if 0 <= pos.x and pos.x < width and 0 <= pos.y and pos.y < height:
 		return true
 	return false
 
+#Signal handler triggered when the player is clicked
 func _on_Player_clicked():
 	if direction_hints.empty():
 		generate_direction_hints(2)
 	else:
 		direction_hints.clear()
 		remove_direction_hints()
-	
+
+#Hide and remove direction hints
 func remove_direction_hints():
 	for i in range(0, player_instance.get_node("Hints").get_child_count()):
 		player_instance.get_node("Hints").get_child(i).queue_free()
-	
+
+#Generate and display direction hints of distance <length>
+#PARAM length : int
 func generate_direction_hints(length):
 	var pos = get_map_index(player_instance.get_node("../").position)
 	for index in range(1, length+1):
@@ -141,7 +164,7 @@ func generate_direction_hints(length):
 			if in_bounds(Vector2(pos.x + offset.x * index, pos.y + offset.y * index), map[0].size(), map.size()):
 				for node in map[pos.y + offset.y * index][pos.x + offset.x * index].get_children():
 					if Groups.blocking(node):
-						blocking = true
+						blocking = true	
 				if not blocking:
 					var hint_instance = hint.instance()
 					hint_instance.z_index = 10
