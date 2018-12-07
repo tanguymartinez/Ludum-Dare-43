@@ -4,4 +4,5 @@
   <img src="Game/res/Img/Tiles/Player/character_idle1.png">
 </p>
 Game made by @omnitrogen & @tanguymartinez
+
 The game is still under development!
