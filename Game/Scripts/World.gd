@@ -198,7 +198,8 @@ func _on_Hint_clicked(pos):
 
 #Specify when it is the player's turn, casting CLI events onto the map first
 #PARAM command : Command
-remote func player_turn(command):
+remote func player_turn(string):
+	var command = Command.new(string)
 	var function = funcref(self, command.command)
 	function.call_func(command.get_args())
 
