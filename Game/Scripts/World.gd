@@ -109,6 +109,7 @@ func get_map_index(pos):
 #PARAM dir : Vector2
 func get_map_dir(dir):
 	return Vector2(dir.x/PIXELS, dir.y/PIXELS)
+
 #Spawns player at specified pixels location
 #PARAM pos: Vector2
 func spawn_player(pos):
@@ -125,7 +126,6 @@ func move_player(dir):
 		player_instance.get_node("../").remove_child(player_instance)
 		map[map_index.y+map_dir.y][map_index.x+map_dir.x].add_child(player_instance)
 		remove_direction_hints()
-		
 
 #Hide and remove direction hints
 func remove_direction_hints():
