@@ -207,7 +207,7 @@ remote func player_turn(string):
 
 #Spawns an enemy at the specified <x,y> position
 #PARAM args : Array(Int, Int)
-func monster(args):
+func monster(args : PoolIntArray):
 	var pos = Vector2(args[1], args[0])
 	spawn(monster, pos)
 	
