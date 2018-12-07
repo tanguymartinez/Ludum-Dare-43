@@ -105,6 +105,10 @@ func _input(event):
 func get_map_index(pos):
 	return Vector2(floor(pos.x/PIXELS), floor(pos.y/PIXELS))
 
+#Converts pixels direction into map dir
+#PARAM dir : Vector2
+func get_map_dir(dir):
+	return Vector2(dir.x/PIXELS, dir.y/PIXELS)
 #Spawns player at specified pixels location
 #PARAM pos: Vector2
 func spawn_player(pos):
@@ -116,12 +120,18 @@ func spawn_player(pos):
 func move_player(dir):
 	if not direction_hints.empty():
 		var player_pos = player_instance.get_node("../").position
+		var map_index = get_map_index(player_pos)
+		var map_dir = get_map_dir(dir)
+		player_instance.get_node("../").remove_child(player_instance)
+		map[map_index.y+map_dir.y][map_index.x+map_dir.x].add_child(player_instance)
+		remove_direction_hints()
 		
 
 #Hide and remove direction hints
 func remove_direction_hints():
 	for i in range(0, player_instance.get_node("Hints").get_child_count()):
 		player_instance.get_node("Hints").get_child(i).queue_free()
+	direction_hints.clear()
 
 #Generate and display direction hints of distance <length>
 #PARAM length : int
@@ -179,9 +189,7 @@ func _on_Player_clicked():
 	if direction_hints.empty():
 		generate_direction_hints(2)
 	else:
-		direction_hints.clear()
 		remove_direction_hints()
 
 func _on_Hint_clicked(pos):
-	print("ok")
 	move_player(pos)
