@@ -1,13 +1,17 @@
 extends Node2D
-
+#Constants
 const SERVER_PORT = 1337
 const MAX_PLAYERS = 1
 
-# Player info, associate ID to data
+#CLI related
 var text = []
+
+#Player related
 var player_id
 var player_ip_address
-var player_infos = []
+
+#Game related
+var playing
 
 func _ready():
 	
@@ -27,11 +31,10 @@ func _ready():
 
 func _player_connected(id):
 	player_id = id
-	print("Player connected...") # Will go unused, not useful here
-	print_text("Player "+ str(id) +" is connected ")
+	print_text("Player "+ str(id) +" is connected...")
 
 func _player_disconnected(id):
-	print("Player disconnected...") # Erase player from info
+	print_text("Player disconnected...") # Erase player from info
 
 func refresh():
 	var string = ""
@@ -46,7 +49,7 @@ func print_text(string):
 func _on_Button_pressed():
 	var string = $"GUI/LineEdit".text
 	print_text(string)
-	rpc_id(player_id, "send_text", string)
+	rpc_id(player_id, "receive_command", string)
 	$"GUI/LineEdit".clear()
 
 func _process(delta):
@@ -57,6 +60,6 @@ remote func store_ip_address(address):
 	player_ip_address = address
 	text[text.size()-1] += " with ip address " + player_ip_address + "..."
 	refresh()
-	
-remote func store_player_info(infos):
-	pass
+
+remote func cli_turn():
+	return

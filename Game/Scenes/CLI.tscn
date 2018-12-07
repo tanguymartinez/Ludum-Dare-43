@@ -213,4 +213,4 @@ text = "Send"
 flat = false
 align = 1
 
-[connection signal="pressed" from="GUI/Button" to="GUI" method="_on_Button_pressed"]
+[connection signal="pressed" from="GUI/Button" to="." method="_on_Button_pressed"]
