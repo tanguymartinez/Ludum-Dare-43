@@ -23,6 +23,6 @@ func _connected_ok():
 	print("Connected to server...")
 	rpc_id(1, "store_ip_address", IP.get_local_addresses()[0])
 
-remote func receive_command(text):
-	print(text)
+remote func receive_command(command):
+	print(command)
 	

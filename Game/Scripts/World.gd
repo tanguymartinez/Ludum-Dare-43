@@ -191,5 +191,6 @@ func _on_Player_clicked():
 	else:
 		remove_direction_hints()
 
+#Signal handler triggered when a hint is clicked
 func _on_Hint_clicked(pos):
 	move_player(pos)
