@@ -9,7 +9,27 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node2D",
+"base": "Reference",
+"class": "Argument",
+"language": "GDScript",
+"path": "res://Scripts/Argument.gd"
+}, {
+"base": "Reference",
+"class": "Command",
+"language": "GDScript",
+"path": "res://Scripts/Command.gd"
+}, {
+"base": "Reference",
+"class": "Enums",
+"language": "GDScript",
+"path": "res://Scripts/Enums.gd"
+}, {
+"base": "Reference",
+"class": "Exception",
+"language": "GDScript",
+"path": "res://Scripts/Exception.gd"
+}, {
+"base": "Reference",
 "class": "Groups",
 "language": "GDScript",
 "path": "res://Scripts/Groups.gd"
@@ -20,6 +40,10 @@ _global_script_classes=[ {
 "path": "res://Scripts/Variables.gd"
 } ]
 _global_script_class_icons={
+"Argument": "",
+"Command": "",
+"Enums": "",
+"Exception": "",
 "Groups": "",
 "Variables": ""
 }
@@ -33,7 +57,6 @@ config/icon="res://res/Img/Tiles/Ground/8.png"
 [autoload]
 
 Variables="*res://Scripts/Variables.gd"
-Groups="*res://Scripts/Groups.gd"
 
 [display]
 

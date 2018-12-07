@@ -23,6 +23,8 @@ func _connected_ok():
 	print("Connected to server...")
 	rpc_id(1, "store_ip_address", IP.get_local_addresses()[0])
 
+#Transmit command to child node for treatment
+#PARAM command : Command
 remote func receive_command(command):
-	print(command)
+	$"World".player_turn(command)
 	

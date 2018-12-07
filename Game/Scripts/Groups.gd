@@ -1,19 +1,13 @@
 class_name Groups
-extends Node2D
-enum COLLIDER{ENNEMY, ALLY, PART}
-enum FREE{}
 
-func _ready():
-	pass
-	
 static func get_group_name(key):
-	if key in (COLLIDER.keys() or FREE.keys()):
+	if key in Enums.COLLIDER.keys():
 		return key
 	return null
 	
 #Returns TRUE if node is blocking
 static func blocking(node):
 	for group in node.get_groups():
-		if int(group) in COLLIDER.values():
+		if int(group) == Enums.COLLIDER.MAP:
 			return false
 	return true

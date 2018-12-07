@@ -57,8 +57,8 @@ func print_text(string):
 func _on_Button_pressed():
 	var string = $"GUI/LineEdit".text
 	print_text(string)
-	rpc_id(player_id, "receive_command", string)
 	$"GUI/LineEdit".clear()
+	rpc_id(player_id, "receive_command", parse_command(string))
 
 func _process(delta):
 	if(Input.is_action_just_pressed("ui_accept")):
@@ -72,7 +72,9 @@ remote func store_ip_address(address):
 	refresh()
 
 remote func cli_turn():
-	return
-
-func parse_command(string):
 	pass
+
+#Parses <string> into Command object
+#PARAM string : String
+func parse_command(string):
+	return Command.new(string)

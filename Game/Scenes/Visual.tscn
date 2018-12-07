@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Visual.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/World.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Tiles/Sand.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Tiles/Tile.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Tiles/Overlay.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Tiles/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Tiles/Hint.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Tiles/Enemy.tscn" type="PackedScene" id=7]
 
 [node name="Multiplayer" type="Node2D"]
 script = ExtResource( 1 )
@@ -16,6 +17,7 @@ default_tile_scene = ExtResource( 3 )
 overlay = ExtResource( 4 )
 player = ExtResource( 5 )
 hint = ExtResource( 6 )
+monster = ExtResource( 7 )
 
 [node name="Tiles" type="Node2D" parent="World"]
 

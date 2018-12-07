@@ -1,0 +1,5 @@
+class_name Enums
+
+enum EXCEPTIONS{ILLEGAL_COMMAND}
+
+enum COLLIDER{ENEMY, ALLY, PART, MAP}

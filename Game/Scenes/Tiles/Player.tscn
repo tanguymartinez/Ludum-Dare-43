@@ -2,11 +2,11 @@
 
 [ext_resource path="res://res/Img/Tiles/Player/character_idle1.png" type="Texture" id=1]
 [ext_resource path="res://res/Img/Tiles/Player/character_idle2.png" type="Texture" id=2]
-[ext_resource path="res://res/Img/Tiles/Player/character_success.png" type="Texture" id=3]
-[ext_resource path="res://res/Img/Tiles/Player/character_crying.png" type="Texture" id=4]
-[ext_resource path="res://res/Img/Tiles/Player/character_astonished.png" type="Texture" id=5]
-[ext_resource path="res://res/Img/Tiles/Player/character_blood_1.png" type="Texture" id=6]
-[ext_resource path="res://res/Img/Tiles/Player/character_blood_2.png" type="Texture" id=7]
+[ext_resource path="res://res/Img/Tiles/Player/character_crying.png" type="Texture" id=3]
+[ext_resource path="res://res/Img/Tiles/Player/character_astonished.png" type="Texture" id=4]
+[ext_resource path="res://res/Img/Tiles/Player/character_blood_1.png" type="Texture" id=5]
+[ext_resource path="res://res/Img/Tiles/Player/character_blood_2.png" type="Texture" id=6]
+[ext_resource path="res://res/Img/Tiles/Player/character_success.png" type="Texture" id=7]
 [ext_resource path="res://res/Img/Tiles/Player/Player.gd" type="Script" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -19,23 +19,23 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "success",
+"name": "crying",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "crying",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
 "name": "astonished",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "dead",
 "speed": 2.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "success",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]

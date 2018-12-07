@@ -12,6 +12,7 @@ export(PackedScene) var default_tile_scene
 export(PackedScene) var overlay
 export(PackedScene) var player
 export(PackedScene) var hint
+export(PackedScene) var monster
 
 #map related
 var files = []
@@ -37,7 +38,7 @@ func _ready():
 		image.load(PATH_TO_GROUND+"/"+str(file))
 		var texture = ImageTexture.new()
 		texture.create_from_image(image, 1)
-		instance.get_node("Sand").texture = texture
+		instance.get_node("Sprite").texture = texture
 		tiles_scn.append(instance)
 	init_map()
 	toggle_highlight_tile(Vector2(0,0))
@@ -95,7 +96,7 @@ func list_files_in_directory(path):
 func _input(event):
 	# Mouse in viewport coordinates
 	if event is InputEventMouseButton and Input.is_action_pressed("ui_click"):
-		spawn_player(event.position)
+		spawn(player_instance, get_map_index(event.position))
 	if event is InputEventMouseMotion:
 		tile_hovered(event.position)
 
@@ -110,11 +111,10 @@ func get_map_index(pos):
 func get_map_dir(dir):
 	return Vector2(dir.x/PIXELS, dir.y/PIXELS)
 
-#Spawns player at specified pixels location
+#Spawns <node> at the specified <pos> map location
 #PARAM pos: Vector2
-func spawn_player(pos):
-	var indexes = get_map_index(pos)
-	map[indexes.y][indexes.x].add_child(player_instance)
+func spawn(node, pos):
+	map[pos.y][pos.x].add_child(node)
 
 #Moves the player of <dir> tiles
 #PARAM dir : Vector2
@@ -179,6 +179,7 @@ func toggle_highlight_tile(pos):
 #PARAM pos : Vector2
 #PARAM width : int
 #PARAM height : int
+#RETURN bool
 func in_bounds(pos, width, height):
 	if 0 <= pos.x and pos.x < width and 0 <= pos.y and pos.y < height:
 		return true
@@ -194,3 +195,18 @@ func _on_Player_clicked():
 #Signal handler triggered when a hint is clicked
 func _on_Hint_clicked(pos):
 	move_player(pos)
+
+#Specify when it is the player's turn, casting CLI events onto the map first
+#PARAM command : Command
+remote func player_turn(command):
+	var function = funcref(self, command.command)
+	function.call_func(command.get_args())
+
+#Commands
+
+#Spawns an enemy at the specified <x,y> position
+#PARAM args : Array(Int, Int)
+func monster(args):
+	var pos = Vector2(args[1], args[0])
+	spawn(monster, pos)
+	
