@@ -209,5 +209,5 @@ remote func player_turn(string):
 #PARAM args : Array(Int, Int)
 func monster(args : PoolIntArray):
 	var pos = Vector2(args[1], args[0])
-	spawn(monster, pos)
+	spawn(monster.instance(), pos)
 	
