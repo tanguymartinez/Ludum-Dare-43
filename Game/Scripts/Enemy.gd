@@ -1,5 +1,4 @@
-extends Sprite
-
+extends AnimatedSprite
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	add_to_group(str(Enums.COLLIDER.MAP))
+	add_to_group(str(Enums.COLLIDER.ENEMY))
