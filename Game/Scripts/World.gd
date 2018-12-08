@@ -129,6 +129,7 @@ func move_player(dir):
 		player_instance.get_node("../").remove_child(player_instance)
 		map[map_index.y+map_dir.y][map_index.x+map_dir.x].add_child(player_instance)
 		remove_direction_hints()
+		$"..".end_turn()
 
 #Hide and remove direction hints
 func remove_direction_hints():

@@ -64,11 +64,16 @@ func _on_Button_pressed():
 		print_text("[color=red]Please enter a valid command...[/color]")
 		return
 	print_text(string)
+	end_turn()
 	rpc_id(player_id, "receive_command", string)
 
 func _process(delta):
 	if(Input.is_action_just_pressed("ui_accept")):
 		_on_Button_pressed()
+
+func end_turn():
+	$"GUI/LineEdit".editable = false
+	$"GUI/Button".disabled = true
 
 #Stores the player's ip address
 #PARAM address : String
@@ -78,4 +83,5 @@ remote func store_ip_address(address):
 	refresh()
 
 remote func cli_turn():
-	pass
+	$"GUI/LineEdit".editable = true
+	$"GUI/Button".disabled = false
