@@ -27,4 +27,3 @@ func _connected_ok():
 #PARAM command : Command
 remote func receive_command(command):
 	$"World".player_turn(command)
-	

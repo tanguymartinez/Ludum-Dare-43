@@ -58,6 +58,11 @@ func _on_Button_pressed():
 	var string = $"GUI/LineEdit".text
 	print_text(string)
 	$"GUI/LineEdit".clear()
+	var command = Command.new(string)
+	if not command.exception == null:
+		print_text("Exception: "+command.exception.get_description())
+		print_text("Please enter a valid command...")
+		return
 	rpc_id(player_id, "receive_command", string)
 
 func _process(delta):
@@ -73,8 +78,3 @@ remote func store_ip_address(address):
 
 remote func cli_turn():
 	pass
-
-#Parses <string> into Command object
-#PARAM string : String
-#func parse_command(string):
-#	return Command.new(string)

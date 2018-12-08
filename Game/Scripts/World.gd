@@ -1,6 +1,5 @@
 extends Node2D
 
-
 #Constants
 const GRID_WIDTH = 15
 const GRID_HEIGHT = 10
@@ -114,6 +113,10 @@ func get_map_dir(dir):
 #Spawns <node> at the specified <pos> map location
 #PARAM pos: Vector2
 func spawn(node, pos):
+	for node_tmp in map[pos.y][pos.x].get_children():
+		if Groups.blocking(node_tmp):
+			print("Can't spawn on colliding tile...")
+			return
 	map[pos.y][pos.x].add_child(node)
 
 #Moves the player of <dir> tiles

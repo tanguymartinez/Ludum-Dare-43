@@ -17,6 +17,7 @@ animations = [ {
 z_index = 10
 frames = SubResource( 1 )
 animation = "Walking"
+frame = 1
 playing = true
 centered = false
 script = ExtResource( 3 )

@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Enums.gd"
 }, {
-"base": "Reference",
+"base": "Object",
 "class": "Exception",
 "language": "GDScript",
 "path": "res://Scripts/Exception.gd"
