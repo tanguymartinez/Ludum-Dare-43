@@ -95,7 +95,9 @@ func list_files_in_directory(path):
 func _input(event):
 	# Mouse in viewport coordinates
 	if event is InputEventMouseButton and Input.is_action_pressed("ui_click"):
-		spawn(player_instance, get_map_index(event.position))
+		if not player_instance.is_inside_tree():
+			spawn(player_instance, get_map_index(event.position))
+			end_turn()
 	if event is InputEventMouseMotion:
 		tile_hovered(event.position)
 
@@ -129,7 +131,10 @@ func move_player(dir):
 		player_instance.get_node("../").remove_child(player_instance)
 		map[map_index.y+map_dir.y][map_index.x+map_dir.x].add_child(player_instance)
 		remove_direction_hints()
-		$"..".end_turn()
+		end_turn()
+
+func end_turn():
+	$"..".end_turn()
 
 #Hide and remove direction hints
 func remove_direction_hints():
