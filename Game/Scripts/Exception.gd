@@ -3,7 +3,8 @@ extends Object
 
 var exception setget ,get_exception
 const description = [
-	"You typed a command which doesn't exist!"
+	"You typed a command which doesn't exist!",
+	"Arguments aren't conform to the specifications!"
 ]
 
 func _init(exception):

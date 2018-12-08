@@ -1,9 +1,9 @@
 extends Node2D
 
 #Constants
-const GRID_WIDTH = 15
-const GRID_HEIGHT = 10
-const PIXELS = 100
+var GRID_WIDTH = Variables.GRID_WIDTH
+var GRID_HEIGHT = Variables.GRID_HEIGHT
+var PIXELS = Variables.PIXELS
 const PATH_TO_GROUND = "res://res/Img/Tiles/Ground"
 
 #Exports
@@ -207,11 +207,11 @@ remote func player_turn(string):
 
 
 #Commands
+#Don't forget to write tests
 
 #Spawns an enemy at the specified <x,y> position
 #PARAM x : Arg(Int)
 #PARAM y : Arg(Int)
 func monster(x, y):
-	var pos = Vector2(x.value, y.value)
+	var pos = Vector2(y.value, x.value)
 	spawn(monster.instance(), pos)
-	
