@@ -45,7 +45,7 @@ func refresh():
 	var string = ""
 	for line in text:
 		string += line + "\n"
-	$"GUI/CLI".text = string
+	$"GUI/CLI".bbcode_text = string
 
 #Prints the <string> to the CLI
 #PARAM string : String
@@ -58,11 +58,12 @@ func _on_Button_pressed():
 	var string = $"GUI/LineEdit".text
 	$"GUI/LineEdit".clear()
 	var command = Command.new(string)
-	print_text(string)
 	if not command.exception == null:
-		print_text("Exception: "+command.exception.get_description())
-		print_text("Please enter a valid command...")
+		print_text("[color=red]"+string+"[/color]")
+		print_text("[color=red]Exception: "+command.exception.get_description()+"[/color]")
+		print_text("[color=red]Please enter a valid command...[/color]")
 		return
+	print_text(string)
 	rpc_id(player_id, "receive_command", string)
 
 func _process(delta):
