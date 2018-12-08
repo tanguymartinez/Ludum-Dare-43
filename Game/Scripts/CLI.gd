@@ -58,11 +58,11 @@ func _on_Button_pressed():
 	var string = $"GUI/LineEdit".text
 	$"GUI/LineEdit".clear()
 	var command = Command.new(string)
+	print_text(string)
 	if not command.exception == null:
 		print_text("Exception: "+command.exception.get_description())
 		print_text("Please enter a valid command...")
 		return
-	print_text(string)
 	rpc_id(player_id, "receive_command", string)
 
 func _process(delta):
