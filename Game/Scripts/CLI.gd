@@ -56,13 +56,13 @@ func print_text(string):
 #Signal handler triggered when the send button is pressed
 func _on_Button_pressed():
 	var string = $"GUI/LineEdit".text
-	print_text(string)
 	$"GUI/LineEdit".clear()
 	var command = Command.new(string)
 	if not command.exception == null:
 		print_text("Exception: "+command.exception.get_description())
 		print_text("Please enter a valid command...")
 		return
+	print_text(string)
 	rpc_id(player_id, "receive_command", string)
 
 func _process(delta):

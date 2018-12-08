@@ -7,7 +7,7 @@ const description = [
 ]
 
 func _init(exception):
-	if Enums.EXCEPTIONS.has(exception):
+	if exception in Enums.EXCEPTIONS.values():
 		self.exception = exception
 
 func get_description():

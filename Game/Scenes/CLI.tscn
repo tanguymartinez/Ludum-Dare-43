@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/CLI.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Button.gd" type="Script" id=2]
@@ -77,16 +77,6 @@ outline_color = Color( 1, 1, 1, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 3 )
-
-[sub_resource type="InputEventAction" id=5]
-
-device = 0
-action = "ui_accept"
-pressed = true
-
-[sub_resource type="ShortCut" id=6]
-
-shortcut = SubResource( 5 )
 
 [node name="Multiplayer" type="Node2D"]
 position = Vector2( 750, 500 )
@@ -207,7 +197,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 toggle_mode = false
 enabled_focus_mode = 2
-shortcut = SubResource( 6 )
+shortcut = null
 group = null
 text = "Send"
 flat = false
