@@ -200,14 +200,15 @@ func _on_Hint_clicked(pos):
 #PARAM command : Command
 remote func player_turn(string):
 	var command = Command.new(string)
-	var function = funcref(self, command.command)
-	function.call_func(command.get_args())
+	callv(command.command, command.args)
+
 
 #Commands
 
 #Spawns an enemy at the specified <x,y> position
-#PARAM args : Array(Int, Int)
-func monster(args : PoolIntArray):
-	var pos = Vector2(args[1], args[0])
+#PARAM x : Arg(Int)
+#PARAM y : Arg(Int)
+func monster(x, y):
+	var pos = Vector2(x.value, y.value)
 	spawn(monster.instance(), pos)
 	

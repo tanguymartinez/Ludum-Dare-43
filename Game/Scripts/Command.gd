@@ -3,7 +3,7 @@ class_name Command
 #Available commands
 const commands = {"monster" : [TYPE_INT, TYPE_INT]}
 
-var command setget ,get_command
+var command : String setget ,get_command
 var args = [] setget ,get_args
 var exception
 
