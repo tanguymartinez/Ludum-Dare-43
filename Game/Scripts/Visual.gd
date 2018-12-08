@@ -30,4 +30,5 @@ func end_turn():
 #Transmit command to child node for treatment
 #PARAM command : Command
 remote func receive_command(command):
+	get_tree().paused = false
 	$"World".player_turn(command)

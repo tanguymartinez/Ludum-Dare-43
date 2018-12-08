@@ -67,8 +67,8 @@ func _on_Button_pressed():
 	end_turn()
 	rpc_id(player_id, "receive_command", string)
 
-func _process(delta):
-	if(Input.is_action_just_pressed("ui_accept")):
+func _input(event):
+	if event is InputEventMouseButton and Input.is_action_pressed("ui_click"):
 		_on_Button_pressed()
 
 func end_turn():
