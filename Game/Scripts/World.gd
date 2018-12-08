@@ -215,5 +215,5 @@ remote func player_turn(string):
 #PARAM x : Arg(Int)
 #PARAM y : Arg(Int)
 func monster(x, y):
-	var pos = Vector2(y.value, x.value)
+	var pos = Vector2(x.value, y.value)
 	spawn(monster.instance(), pos)
