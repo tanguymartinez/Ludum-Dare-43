@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/normal_1.png-6fa8fca35af410f58b5c666efc4290ce.stex"
+path="res://.import/monster.png-dc991ecd40f529715d0d390acd25be86.stex"
 
 [deps]
 
-source_file="res://res/Img/Tiles/Enemies/normal_1.png"
-dest_files=[ "res://.import/normal_1.png-6fa8fca35af410f58b5c666efc4290ce.stex" ]
+source_file="res://res/Img/Tiles/Enemies/monster.png"
+dest_files=[ "res://.import/monster.png-dc991ecd40f529715d0d390acd25be86.stex" ]
 
 [params]
 
