@@ -140,13 +140,13 @@ func remove_direction_hints():
 #PARAM length : int
 func generate_direction_hints(length):
 	var pos = get_map_index(player_instance.get_node("../").position)
-	for index in range(1, length+1):
-		for offset in direction_offsets:
+	for offset in direction_offsets:
+		for index in range(1, length+1):
 			var blocking = false
 			if in_bounds(Vector2(pos.x + offset.x * index, pos.y + offset.y * index), map[0].size(), map.size()):
 				for node in map[pos.y + offset.y * index][pos.x + offset.x * index].get_children():
 					if Groups.blocking(node):
-						blocking = true	
+						blocking = true
 				if not blocking:
 					var hint_instance = hint.instance()
 					hint_instance.find_node("Area2D").connect("hint_clicked", self, "_on_Hint_clicked")
@@ -154,6 +154,8 @@ func generate_direction_hints(length):
 					hint_instance.position = Vector2(offset.x * index * PIXELS, offset.y * index * PIXELS)
 					direction_hints.append(hint_instance)
 					player_instance.get_node("Hints").add_child(hint_instance)
+				else:
+					break;
 
 
 #Updates position of the selection tile
