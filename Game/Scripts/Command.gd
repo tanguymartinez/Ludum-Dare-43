@@ -4,8 +4,9 @@ class_name Command
 const commands = {
 	#name : [args_types, "check_function_name", "description", whether_to_exec_locally]
 	"monster" : [TYPE_INT, TYPE_INT, "monster_check", "Spawns a normal monster at the specified \"x y\" location", false],
-	"help" : [TYPE_STRING, "help_check", "Displays and insightful help message about the <command_name> you supplied as parameter", true],
-	"list" : ["list_check", "List all available commands", true]
+	"help" : [TYPE_STRING, "help_check", "Displays an insightful help message about the <command_name> you supplied as parameter", true],
+	"list" : ["list_check", "List all available commands", true],
+	"uname" : ["uname_check", "Displays the name of the host OS", true]
 }
 
 var command setget ,get_command

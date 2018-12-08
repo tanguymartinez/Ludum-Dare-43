@@ -118,3 +118,9 @@ func list():
 		print_text("\t\t*Arguments: "+formatted_args)
 		print_text("\t\t*Description: "+Command.commands[command][Command.commands[command].size()-2])
 		print_text("")
+
+#Displays the name of the host OS
+func uname():
+	var os_name = OS.get_name()
+	print_text("Your OS is: " + os_name)
+	print_text("")
