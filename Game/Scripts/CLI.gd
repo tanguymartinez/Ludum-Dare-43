@@ -63,7 +63,7 @@ func _on_Button_pressed():
 		print_text("[color=red]Exception: "+command.exception.get_description()+"[/color]")
 		print_text("[color=red]Please enter a valid command...[/color]")
 		return
-	print_text(string)
+	print_text(command.command)
 	if command.is_local():
 		callv(command.command, command.args)
 	else:
@@ -93,13 +93,28 @@ remote func cli_turn():
 
 #Displays an insightful help message
 #PARAM string : Arg(String)
-#RETURN string
 func help(string):
 	var command = Command.new(string.value)
 	var formatted_args = ""
 	for arg in command.args:
 		formatted_args += str(arg.type_str)+", "
 	formatted_args = formatted_args.substr(0, formatted_args.length()-2) #Remove last hyphen
-	print_text("Command: "+command.command+"\n"
-		+"Arguments: "+formatted_args+"\n"
-		+"Description: "+command.description+"\n")
+	print_text("Command: "+command.command)
+	print_text("\t*Arguments: "+("No argument" if formatted_args.empty() else formatted_args))
+	print_text("\t*Description: "+command.description)
+
+#Displays a list of all available commands
+func list():
+	print_text("List of all available commands:")
+	for command in Command.commands:
+		print_text("\t-"+command+":")
+		var formatted_args = ""
+		var args = []
+		for i in range(Command.commands[command].size()-3):
+			args.append(Argument.new(convert("", Command.commands[command][i]), Command.commands[command][i]))
+		for arg in args:
+			formatted_args += str(arg.type_str)+", "
+		formatted_args = formatted_args.substr(0, formatted_args.length()-2) #Remove last hyphen
+		print_text("\t\t*Arguments: "+formatted_args)
+		print_text("\t\t*Description: "+Command.commands[command][Command.commands[command].size()-2])
+		print_text("")

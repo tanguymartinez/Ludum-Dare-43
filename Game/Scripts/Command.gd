@@ -4,7 +4,8 @@ class_name Command
 const commands = {
 	#name : [args_types, "check_function_name", "description", whether_to_exec_locally]
 	"monster" : [TYPE_INT, TYPE_INT, "monster_check", "Spawns a normal monster at the specified \"x y\" location", false],
-	"help" : [TYPE_STRING, "help_check", "Help <command_name>", true]
+	"help" : [TYPE_STRING, "help_check", "Displays and insightful help message about the <command_name> you supplied as parameter", true],
+	"list" : ["list_check", "List all available commands", true]
 }
 
 var command setget ,get_command
@@ -25,11 +26,17 @@ func _init(string):
 		description = commands[command][commands[command].size()-2] #Set description
 		local = commands[command][commands[command].size()-1] #Set whether local or not
 		if array.size() == 0: #If no arguments supplied
-			for i in range(commands[command].size()-3): #Loop over the arguments
-				args.append(Argument.new(convert(0, commands[command][i]), commands[command][i])) #Insert argument in args
-			exception = Exception.new(Enums.EXCEPTIONS.MISSING_ARGUMENTS) #Fill exception
+			if commands[command].size() <= 3: #If command does not require any argument
+				pass
+			else: #Command required arguments
+				for i in range(commands[command].size()-3): #Loop over the arguments
+					args.append(Argument.new(convert("", commands[command][i]), commands[command][i])) #Insert argument in args
+				exception = Exception.new(Enums.EXCEPTIONS.MISSING_ARGUMENTS) #Fill exception
 		else: #Else (if arguments supplied)
 			for i in range(commands[command].size()-3): #Loop over the arguments
+				if array.size() == 0: #Arguments were not all present
+					exception = Exception.new(Enums.EXCEPTIONS.MISSING_ARGUMENTS)
+					return
 				args.append(Argument.new(convert(array[0], commands[command][i]), commands[command][i])) #Insert argument in args
 				array.remove(0) #Remove head
 			if not callv(commands[command][commands[command].size()-3], args): #If specific check unvalidate params
@@ -55,15 +62,24 @@ func is_local():
 #Commands checks
 
 #Checks that supplied coordinates correspond to the map
+#PARAM x : Arg(int)
+#PARAM y : Arg(int)
 func monster_check(x, y):
 	if in_bounds(Vector2(y.value,x.value), Variables.GRID_HEIGHT, Variables.GRID_WIDTH):
 		return true
 	return false
 
+#Checks whether the string is a valid command
+#PARAM string : Arg(String)
 func help_check(string):
 	if commands.has(string.value):
 		return true
 	return false
+
+#Checks whether the command is valid
+#PARAM string : Arg(Nil)
+func list_check():
+	return true
 
 #Checks whether the position supplied is in the grid of width <width> and height <height>
 #PARAM pos : Vector2
