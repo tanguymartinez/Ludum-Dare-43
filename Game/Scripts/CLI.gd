@@ -64,8 +64,11 @@ func _on_Button_pressed():
 		print_text("[color=red]Please enter a valid command...[/color]")
 		return
 	print_text(string)
-	end_turn()
-	rpc_id(player_id, "receive_command", string)
+	if command.is_local():
+		callv(command.command, command.args)
+	else:
+		rpc_id(player_id, "receive_command", string)
+		end_turn()
 
 func _input(event):
 	if event is InputEventKey and event.scancode == KEY_ENTER and Input.is_action_pressed("ui_accept"):
@@ -85,3 +88,18 @@ remote func store_ip_address(address):
 remote func cli_turn():
 	$"GUI/LineEdit".editable = true
 	$"GUI/Button".disabled = false
+
+#Local commands
+
+#Displays an insightful help message
+#PARAM string : Arg(String)
+#RETURN string
+func help(string):
+	var command = Command.new(string.value)
+	var formatted_args = ""
+	for arg in command.args:
+		formatted_args += str(arg.type_str)+", "
+	formatted_args = formatted_args.substr(0, formatted_args.length()-2) #Remove last hyphen
+	print_text("Command: "+command.command+"\n"
+		+"Arguments: "+formatted_args+"\n"
+		+"Description: "+command.description+"\n")

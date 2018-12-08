@@ -4,7 +4,9 @@ extends Object
 var exception setget ,get_exception
 const description = [
 	"You typed a command which doesn't exist!",
-	"Arguments aren't conform to the specifications!"
+	"Arguments aren't conform to the specifications!",
+	"You supplied the wrong numbers of arguments!",
+	"Maybe try to write something before sending?"
 ]
 
 func _init(exception):
