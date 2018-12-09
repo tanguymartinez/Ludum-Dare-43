@@ -38,6 +38,7 @@ func _ready():
 		var texture = ImageTexture.new()
 		texture.create_from_image(image, 1)
 		instance.get_node("Sprite").texture = texture
+		instance.get_node("Sprite").z_index = -1
 		tiles_scn.append(instance)
 	init_map()
 	toggle_highlight_tile(Vector2(0,0))
@@ -69,6 +70,7 @@ func init_map():
 	for i in range(map.size()):
 		for j in range(map[0].size()):
 			map[i][j].position = Vector2(j*100, i*100)
+			map[i][j].z_index = -1
 			self.get_node("Tiles").add_child(map[i][j])
 
 #List files in a directory
@@ -215,7 +217,6 @@ remote func player_turn(string):
 
 
 #Commands
-#Don't forget to write tests
 
 #Spawns an enemy at the specified <x,y> position
 #PARAM x : Arg(Int)
