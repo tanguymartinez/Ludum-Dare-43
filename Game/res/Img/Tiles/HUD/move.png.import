@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hint.png-b24234136be4191008675d8ca75d032b.stex"
+path="res://.import/move.png-84c78d412443029cab9497da14353f5e.stex"
 
 [deps]
 
-source_file="res://res/Img/Tiles/HUD/hint.png"
-dest_files=[ "res://.import/hint.png-b24234136be4191008675d8ca75d032b.stex" ]
+source_file="res://res/Img/Tiles/HUD/move.png"
+dest_files=[ "res://.import/move.png-84c78d412443029cab9497da14353f5e.stex" ]
 
 [params]
 

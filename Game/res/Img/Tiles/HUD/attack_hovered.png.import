@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hint.png-b24234136be4191008675d8ca75d032b.stex"
+path="res://.import/attack_hovered.png-79f92a4848eb8d4fb6b2c110616c3f04.stex"
 
 [deps]
 
-source_file="res://res/Img/Tiles/HUD/hint.png"
-dest_files=[ "res://.import/hint.png-b24234136be4191008675d8ca75d032b.stex" ]
+source_file="res://res/Img/Tiles/HUD/attack_hovered.png"
+dest_files=[ "res://.import/attack_hovered.png-79f92a4848eb8d4fb6b2c110616c3f04.stex" ]
 
 [params]
 
@@ -17,7 +17,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
