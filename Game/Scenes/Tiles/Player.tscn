@@ -47,9 +47,9 @@ extents = Vector2( 100, 100 )
 [node name="Player" type="Node2D"]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-editor/display_folded = true
 frames = SubResource( 1 )
 animation = "idle"
+frame = 1
 playing = true
 centered = false
 
@@ -73,6 +73,7 @@ shape = SubResource( 2 )
 [node name="Hints" type="Node2D" parent="."]
 
 [node name="Control" parent="." instance=ExtResource( 9 )]
+visible = false
 margin_left = 100.0
 margin_right = 100.0
 margin_bottom = 0.0

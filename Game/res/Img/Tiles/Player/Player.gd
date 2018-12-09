@@ -1,6 +1,6 @@
 extends Area2D
 
-signal player_clicked(pos)
+signal player_clicked()
 
 func _ready():
 	add_to_group(str(Enums.COLLIDER.ALLY))

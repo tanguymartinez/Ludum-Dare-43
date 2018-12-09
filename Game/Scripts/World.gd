@@ -13,7 +13,7 @@ export(PackedScene) var player
 export(PackedScene) var hint
 export(PackedScene) var monster
 
-#map related
+#Map related
 var files = []
 var tiles_scn = [] #TO-DO implement getter to remove duplicate duplicate
 var map = [] #map of actual node instances
@@ -21,13 +21,18 @@ var tile_hovered = Vector2(0, 0)
 var direction_hints = [] #tiles showing where one can move
 var direction_offsets = [Vector2(-1, 0), Vector2(0, -1), Vector2(1, 0), Vector2(0, 1)] #offset from one's position, multiplicable
 
-#player
+#Player
 var player_instance
+
+#HUD logic
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player_instance = player.instance()
 	player_instance.find_node("Area2D").connect("player_clicked", self, "_on_Player_clicked")
+	player_instance.find_node("GridContainer").connect("move_clicked", self, "_on_Move_clicked")
+	player_instance.find_node("GridContainer").connect("attack_clicked", self, "_on_Attack_clicked")
+	player_instance.find_node("GridContainer").connect("teleport_clicked", self, "_on_Teleport_clicked")
 	
 	files = list_files_in_directory(PATH_TO_GROUND)
 	files.sort()
@@ -100,7 +105,7 @@ func _input(event):
 		if not player_instance.is_inside_tree():
 			spawn(player_instance, get_map_index(event.position))
 			end_turn()
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and not hud_visible():
 		tile_hovered(event.position)
 
 #Converts pixels position into map index
@@ -188,6 +193,15 @@ func toggle_highlight_tile(pos):
 		else:
 			map[pos.y][pos.x].add_child(overlay.instance())
 
+#Toggles HUD
+func toggle_hud():
+	player_instance.find_node("Control").visible = not hud_visible()
+
+#Check whether HUD is visible
+#RETURN bool
+func hud_visible():
+	return true if player_instance.find_node("Control").visible else false
+
 #Checks whether the position supplied is in the grid of width <width> and height <height>
 #PARAM pos : Vector2
 #PARAM width : int
@@ -200,10 +214,31 @@ func in_bounds(pos, width, height):
 
 #Signal handler triggered when the player is clicked
 func _on_Player_clicked():
+	toggle_hud()
+	if not direction_hints.empty():
+		remove_direction_hints()
+
+#Signal handler triggered when the move button is clicked
+func _on_Move_clicked():
+	toggle_hud()
 	if direction_hints.empty():
 		generate_direction_hints(2)
-	else:
-		remove_direction_hints()
+
+#Signal handler triggered when the attack button clicked
+func _on_Attack_clicked():
+	toggle_hud()
+#	if direction_hints.empty():
+#		generate_direction_hints(2)
+#	else:
+#		remove_direction_hints()
+
+#Signal handler triggered when the teleport button is clicked
+func _on_Teleport_clicked():
+	toggle_hud()
+#	if direction_hints.empty():
+#		generate_direction_hints(2)
+#	else:
+#		remove_direction_hints()
 
 #Signal handler triggered when a hint is clicked
 func _on_Hint_clicked(pos):
