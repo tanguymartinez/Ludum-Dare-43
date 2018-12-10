@@ -113,6 +113,7 @@ func _input(event):
 	if event is InputEventMouseButton and Input.is_action_pressed("ui_click"):
 		if not player_instance.is_inside_tree():
 			spawn(player_instance, get_map_index(event.position))
+			end_turn()
 	if event is InputEventMouseMotion and not hud_visible():
 		tile_hovered(event.position)
 
@@ -146,6 +147,7 @@ func move_player(dir):
 		player_instance.get_node("../").remove_child(player_instance)
 		map[map_index.y+map_dir.y][map_index.x+map_dir.x].add_child(player_instance)
 		remove_direction_hints()
+		end_turn()
 
 func end_turn():
 	$"..".end_turn()
@@ -268,7 +270,7 @@ remote func player_turn(string):
 #PARAM type : Arg(String)
 func monster(x, y, type):
 	var pos = Vector2(x.value, y.value)
-	var monster = get("monster_"+type).instance()
+	var monster = get("monster_"+type.value).instance()
 	spawn(monster, pos)
 func monster_check(pos, type):
 	if not in_bounds(pos, GRID_WIDTH, GRID_HEIGHT):

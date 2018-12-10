@@ -67,7 +67,8 @@ func is_local():
 #PARAM y : Arg(int)
 #PARAM type : Arg(String)
 func monster_check(x, y, type):
-	if in_bounds(Vector2(y.value,x.value), Variables.GRID_HEIGHT, Variables.GRID_WIDTH) and Enemy.MONSTERS.has(type):
+	if in_bounds(Vector2(y.value,x.value), Variables.GRID_HEIGHT, Variables.GRID_WIDTH) and Enemy.MONSTERS.has(type.value):
+		print("passed monster check")
 		return true
 	return false
 
