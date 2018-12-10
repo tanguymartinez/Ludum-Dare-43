@@ -68,8 +68,8 @@ func _on_Button_pressed():
 	if command.is_local():
 		callv(command.command, command.args)
 	else:
-		rpc_id(player_id, "receive_command", string)
 		end_turn()
+		rpc_id(player_id, "receive_command", string)
 
 func _input(event):
 	if event is InputEventKey and event.scancode == KEY_ENTER and Input.is_action_pressed("ui_accept"):
@@ -90,9 +90,8 @@ remote func cli_turn():
 	$"GUI/LineEdit".editable = true
 	$"GUI/Button".disabled = false
 
-remote func exception(exception):
-	var exception_tmp = Exception.new(exception)
-	print_text(exception_tmp.get_description())
+remote func print_exception(exception):
+	print_text(exception)
 
 #Local commands
 

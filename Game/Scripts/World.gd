@@ -255,7 +255,7 @@ func _on_Hint_clicked(pos):
 
 #Specify when it is the player's turn, casting CLI events onto the map first
 #PARAM command : Command
-remote func player_turn(string):
+func player_turn(string):
 	var command = Command.new(string)
 	var exception = callv(command.command, command.args)
 	if not exception == null:
@@ -269,11 +269,16 @@ remote func player_turn(string):
 #PARAM y : Arg(Int)
 #PARAM type : Arg(String)
 func monster(x, y, type):
-	var pos = Vector2(x.value, y.value)
-	var monster = get("monster_"+type.value).instance()
-	spawn(monster, pos)
-func monster_check(pos, type):
-	if not in_bounds(pos, GRID_WIDTH, GRID_HEIGHT):
+	match monster_check(x.value, y.value, type.value):
+		null:
+			var pos = Vector2(x.value, y.value)
+			var monster = get("monster_"+type.value).instance()
+			spawn(monster, pos)
+			return null
+		var exception:
+			return exception
+func monster_check(x, y, type):
+	if not in_bounds(Vector2(x, y), GRID_WIDTH, GRID_HEIGHT):
 		return Exception.new(Enums.EXCEPTIONS.OUT_OF_RANGE)
 	if not type in Enemy.MONSTERS:
 		return Exception.new(Enums.EXCEPTIONS.UNKNOWN_TYPE)
