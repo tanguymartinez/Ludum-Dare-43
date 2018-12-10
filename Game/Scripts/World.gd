@@ -314,6 +314,6 @@ func move(id, offset_x, offset_y):
 func move_check(id, offset_x, offset_y):
 	if not in_bounds(references[id]["node"].position+Vector2(offset_x, offset_y), GRID_WIDTH, GRID_HEIGHT):
 		return Exception.new(Enums.EXCEPTIONS.OUT_OF_RANGE)
-	if not references.has(id.value):
+	if not references.has(id):
 		return Exception.new(Enums.EXCEPTIONS.UNKNOWN_REFERENCE)
 	return null #Default
