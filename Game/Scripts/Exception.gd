@@ -8,7 +8,7 @@ const description = [
 	"You supplied the wrong numbers of arguments!",
 	"Maybe try to write something before sending?",
 	"It's a shame to send something outside the map!",
-	"Hmmm, looks like this thingy you're trying to summon never existed!"
+	"Hmmm, looks like this thingy you're trying to summon never existed!",
 	"Call to non-existent id!"
 ]
 

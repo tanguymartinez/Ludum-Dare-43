@@ -127,17 +127,20 @@ func get_map_index(pos):
 
 #Converts pixels direction into map dir
 #PARAM dir : Vector2
+#RETURN Vector2
 func get_map_dir(dir):
 	return Vector2(dir.x/PIXELS, dir.y/PIXELS)
 
 #Spawns <node> at the specified <pos> map location
 #PARAM pos: Vector2
+#RETURN bool
 func spawn(node, pos):
 	for node_tmp in map[pos.y][pos.x].get_children():
 		if Groups.blocking(node_tmp):
 			print("Can't spawn on colliding tile...")
-			return
+			return false
 	map[pos.y][pos.x].add_child(node)
+	return true
 
 #Moves the player of <dir> tiles
 #PARAM dir : Vector2
@@ -259,26 +262,38 @@ func _on_Hint_clicked(pos):
 #PARAM command : Command
 func player_turn(string):
 	var command = Command.new(string)
-	var exception = callv(command.command, command.args)
+	var exception = call("exec_command", command)
 	if not exception == null:
 		$"..".exception(exception.get_exception())
 
+#Insert a new entry into references
+func references_insert(node, type):
+	references[references.size()] = {
+		"node" : node,
+		"type" : type
+	}
 
 #Commands
+
+#Execute standard command, you MUST call the checking function "<command_name>_check"
+#Param command : Command
+func exec_command(command):
+	match callv(command.command+"_check", command.args):
+		null:
+			callv(command.command, command.args)
+			return null
+		var exception:
+			return exception
 
 #Spawns an enemy at the specified <x,y> position
 #PARAM x : Arg(Int)
 #PARAM y : Arg(Int)
 #PARAM type : Arg(String)
 func monster(x, y, type):
-	match monster_check(x.value, y.value, type.value):
-		null:
-			var pos = Vector2(x.value, y.value)
-			var monster = get("monster_"+type.value).instance()
-			spawn(monster, pos)
-			return null
-		var exception:
-			return exception
+	var pos = Vector2(x.value, y.value)
+	var monster = get("monster_"+type.value).instance()
+	if spawn(monster, pos):
+		references_insert(monster, type.value)
 func monster_check(x, y, type):
 	if not in_bounds(Vector2(x, y), GRID_WIDTH, GRID_HEIGHT):
 		return Exception.new(Enums.EXCEPTIONS.OUT_OF_RANGE)
@@ -291,15 +306,11 @@ func monster_check(x, y, type):
 #PARAM offset_x : Arg(Int)
 #PARAM offset_y : Arg(Int)
 func move(id, offset_x, offset_y):
-	match move_check(id.value, offset_x.value, offset_y.value):
-		null:
-			var node = references[id.value]["node"]
-			var pos = get_map_index(node.position)
-			node.get_node("../").remove_node(node)
-			map[pos.y+offset_y][pos.x+offset_x].add_child(node)
-			return null
-		var exception:
-			return exception
+	var node = references[id.value]["node"]
+	var pos = get_map_index(node.position)
+	node.get_node("../").remove_node(node)
+	map[pos.y+offset_y][pos.x+offset_x].add_child(node)
+	return null
 func move_check(id, offset_x, offset_y):
 	if not in_bounds(references[id.value]["node"].position+Vector2(offset_x, offset_y), GRID_WIDTH, GRID_HEIGHT):
 		return Exception.new(Enums.EXCEPTIONS.OUT_OF_RANGE)
