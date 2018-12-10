@@ -3,12 +3,12 @@ class_name Command
 #Available commands
 const commands = {
 	#name : [args_types, "check_function_name", "description", whether_to_exec_locally]
-	"monster" : [TYPE_INT, TYPE_INT, "monster_check", "Spawns a normal monster at the specified \"x y\" location", false],
+	"monster" : [TYPE_INT, TYPE_INT, TYPE_STRING, "monster_check", "Spawns a <type> monster at the specified \"x y\" location", false],
+	"move" : [TYPE_INT, TYPE_INT, TYPE_INT, "move_check", "Moves the monster of id <id> of \"x y\" tiles", false],
 	"help" : [TYPE_STRING, "help_check", "Displays an insightful help message about the <command_name> you supplied as parameter", true],
 	"list" : ["list_check", "List all available commands", true],
 	"uname" : ["uname_check", "Displays the name of the host OS", true]
 }
-
 var command setget ,get_command
 var args = [] setget ,get_args
 var exception
@@ -65,7 +65,17 @@ func is_local():
 #Checks that supplied coordinates correspond to the map
 #PARAM x : Arg(int)
 #PARAM y : Arg(int)
-func monster_check(x, y):
+#PARAM type : Arg(String)
+func monster_check(x, y, type):
+	if in_bounds(Vector2(y.value,x.value), Variables.GRID_HEIGHT, Variables.GRID_WIDTH) and Enemy.MONSTERS.has(type):
+		return true
+	return false
+
+#Checks that supplied coordinates correspond to the map and that id is valid
+#PARAM id : Arg(int)
+#PARAM x : Arg(int)
+#PARAM y : Arg(int)
+func move_check(id, x, y):
 	if in_bounds(Vector2(y.value,x.value), Variables.GRID_HEIGHT, Variables.GRID_WIDTH):
 		return true
 	return false
@@ -91,4 +101,3 @@ func in_bounds(pos, width, height):
 	if 0 <= pos.x and pos.x < width and 0 <= pos.y and pos.y < height:
 		return true
 	return false
-

@@ -11,6 +11,7 @@ var player_id
 var player_ip_address
 
 #Game related
+var entities = [] #[id, node]
 var playing
 
 func _ready():
@@ -88,6 +89,10 @@ remote func store_ip_address(address):
 remote func cli_turn():
 	$"GUI/LineEdit".editable = true
 	$"GUI/Button".disabled = false
+
+remote func exception(exception):
+	var exception_tmp = Exception.new(exception)
+	print_text(exception_tmp.get_description())
 
 #Local commands
 

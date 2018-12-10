@@ -11,7 +11,13 @@ export(PackedScene) var default_tile_scene
 export(PackedScene) var overlay
 export(PackedScene) var player
 export(PackedScene) var hint
-export(PackedScene) var monster
+export(PackedScene) var monster_red
+export(PackedScene) var monster_blue
+export(PackedScene) var monster_yellow
+export(PackedScene) var monster_green
+
+#Monsters related
+var monsters_map = {}
 
 #Map related
 var files = []
@@ -20,6 +26,9 @@ var map = [] #map of actual node instances
 var tile_hovered = Vector2(0, 0)
 var direction_hints = [] #tiles showing where one can move
 var direction_offsets = [Vector2(-1, 0), Vector2(0, -1), Vector2(1, 0), Vector2(0, 1)] #offset from one's position, multiplicable
+#
+##Referencing purposes
+#var ids = []
 
 #Player
 var player_instance
@@ -104,7 +113,6 @@ func _input(event):
 	if event is InputEventMouseButton and Input.is_action_pressed("ui_click"):
 		if not player_instance.is_inside_tree():
 			spawn(player_instance, get_map_index(event.position))
-			end_turn()
 	if event is InputEventMouseMotion and not hud_visible():
 		tile_hovered(event.position)
 
@@ -138,7 +146,6 @@ func move_player(dir):
 		player_instance.get_node("../").remove_child(player_instance)
 		map[map_index.y+map_dir.y][map_index.x+map_dir.x].add_child(player_instance)
 		remove_direction_hints()
-		end_turn()
 
 func end_turn():
 	$"..".end_turn()
@@ -248,7 +255,9 @@ func _on_Hint_clicked(pos):
 #PARAM command : Command
 remote func player_turn(string):
 	var command = Command.new(string)
-	callv(command.command, command.args)
+	var exception = callv(command.command, command.args)
+	if not exception == null:
+		$"..".exception(exception.get_exception())
 
 
 #Commands
@@ -256,6 +265,14 @@ remote func player_turn(string):
 #Spawns an enemy at the specified <x,y> position
 #PARAM x : Arg(Int)
 #PARAM y : Arg(Int)
-func monster(x, y):
+#PARAM type : Arg(String)
+func monster(x, y, type):
 	var pos = Vector2(x.value, y.value)
-	spawn(monster.instance(), pos)
+	var monster = get("monster_"+type).instance()
+	spawn(monster, pos)
+func monster_check(pos, type):
+	if not in_bounds(pos, GRID_WIDTH, GRID_HEIGHT):
+		return Exception.new(Enums.EXCEPTIONS.OUT_OF_RANGE)
+	if not type in Enemy.MONSTERS:
+		return Exception.new(Enums.EXCEPTIONS.UNKNOWN_TYPE)
+	return null #Default

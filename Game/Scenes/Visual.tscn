@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/Tiles/Overlay.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Tiles/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Tiles/Hint.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Tiles/Enemy.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Tiles/EnemyRed.tscn" type="PackedScene" id=7]
 
 [node name="Multiplayer" type="Node2D"]
 script = ExtResource( 1 )
@@ -17,7 +17,10 @@ default_tile_scene = ExtResource( 3 )
 overlay = ExtResource( 4 )
 player = ExtResource( 5 )
 hint = ExtResource( 6 )
-monster = ExtResource( 7 )
+monster_red = ExtResource( 7 )
+monster_blue = null
+monster_yellow = null
+monster_green = null
 
 [node name="Tiles" type="Node2D" parent="World"]
 

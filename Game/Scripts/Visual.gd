@@ -5,6 +5,9 @@ extends Node2D
 const SERVER_PORT = 1337
 # Connect all functions
 
+#Entities
+var entities = [] #[id,node]
+
 func _ready():
 	var peer = NetworkedMultiplayerENet.new()
 	peer.create_client(Variables.IpAddress, SERVER_PORT)
@@ -26,6 +29,9 @@ func _connected_ok():
 func end_turn():
 	get_tree().paused = true
 	rpc_id(1, "cli_turn")
+
+func exception(exception):
+	rpc_id(1, "print_exception", exception)
 
 #Transmit command to child node for treatment
 #PARAM command : Command
