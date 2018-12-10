@@ -17,7 +17,9 @@ export(PackedScene) var monster_yellow
 export(PackedScene) var monster_green
 
 #Monsters related
-var monsters_map = {}
+var references = {
+	#id : {"node" : <node>, ...properties]
+}
 
 #Map related
 var files = []
@@ -282,4 +284,25 @@ func monster_check(x, y, type):
 		return Exception.new(Enums.EXCEPTIONS.OUT_OF_RANGE)
 	if not type in Enemy.MONSTERS:
 		return Exception.new(Enums.EXCEPTIONS.UNKNOWN_TYPE)
+	return null #Default
+
+#Moves entity <id> from specified <offset_x, offset_y> position
+#PARAM id : Arg(id)
+#PARAM offset_x : Arg(Int)
+#PARAM offset_y : Arg(Int)
+func move(id, offset_x, offset_y):
+	match move_check(id.value, offset_x.value, offset_y.value):
+		null:
+			var node = references[id.value]["node"]
+			var pos = get_map_index(node.position)
+			node.get_node("../").remove_node(node)
+			map[pos.y+offset_y][pos.x+offset_x].add_child(node)
+			return null
+		var exception:
+			return exception
+func move_check(id, offset_x, offset_y):
+	if not in_bounds(references[id.value]["node"].position+Vector2(offset_x, offset_y), GRID_WIDTH, GRID_HEIGHT):
+		return Exception.new(Enums.EXCEPTIONS.OUT_OF_RANGE)
+	if not references.has(id.value):
+		return Exception.new(Enums.EXCEPTIONS.UNKNOWN_REFERENCE)
 	return null #Default
