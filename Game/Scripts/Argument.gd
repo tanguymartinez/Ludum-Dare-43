@@ -1,6 +1,5 @@
 class_name Argument
 
-var value setget ,get_value
 var type setget ,get_type
 var type_str setget ,get_type_string
 
@@ -35,16 +34,12 @@ const types = [
 	"TYPE_MAX"
 ]
 
-func _init(value, type):
-	if typeof(value) == type:
-		self.value = value
+func _init(type):
+	if 0 <= type and type <= TYPE_MAX:
 		self.type = type
 		self.type_str = types[type]
 	else:
 		print("Failed building argument, type mismatch...")
-
-func get_value():
-	return value
 
 func get_type():
 	return type

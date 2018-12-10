@@ -115,11 +115,11 @@ func list():
 		var formatted_args = ""
 		var args = []
 		for i in range(Command.commands[command].size()-3):
-			args.append(Argument.new(convert("", Command.commands[command][i]), Command.commands[command][i]))
+			args.append(Argument.new(Command.commands[command][i]))
 		for arg in args:
 			formatted_args += str(arg.type_str)+", "
 		formatted_args = formatted_args.substr(0, formatted_args.length()-2) #Remove last hyphen
-		print_text("\t\t*Arguments: "+formatted_args)
+		print_text("\t\t*Arguments: "+ ("No arguments" if formatted_args.length() == 0 else formatted_args))
 		print_text("\t\t*Description: "+Command.commands[command][Command.commands[command].size()-2])
 		print_text("")
 

@@ -31,14 +31,14 @@ func _init(string):
 				pass
 			else: #Command required arguments
 				for i in range(commands[command].size()-3): #Loop over the arguments
-					args.append(Argument.new(convert("", commands[command][i]), commands[command][i])) #Insert argument in args
+					args.append(convert("", commands[command][i])) #Insert argument in args
 				exception = Exception.new(Enums.EXCEPTIONS.MISSING_ARGUMENTS) #Fill exception
 		else: #Else (if arguments supplied)
 			for i in range(commands[command].size()-3): #Loop over the arguments
 				if array.size() == 0: #Arguments were not all present
 					exception = Exception.new(Enums.EXCEPTIONS.MISSING_ARGUMENTS)
 					return
-				args.append(Argument.new(convert(array[0], commands[command][i]), commands[command][i])) #Insert argument in args
+				args.append(convert(array[0], commands[command][i])) #Insert argument in args
 				array.remove(0) #Remove head
 			if not callv(commands[command][commands[command].size()-3], args): #If specific check unvalidate params
 				exception = Exception.new(Enums.EXCEPTIONS.ILLEGAL_ARGUMENTS)
@@ -67,7 +67,7 @@ func is_local():
 #PARAM y : Arg(int)
 #PARAM type : Arg(String)
 func monster_check(x, y, type):
-	if in_bounds(Vector2(y.value,x.value), Variables.GRID_HEIGHT, Variables.GRID_WIDTH) and Enemy.MONSTERS.has(type.value):
+	if in_bounds(Vector2(y, x), Variables.GRID_HEIGHT, Variables.GRID_WIDTH) and Enemy.MONSTERS.has(type):
 		return true
 	return false
 
@@ -76,14 +76,14 @@ func monster_check(x, y, type):
 #PARAM x : Arg(int)
 #PARAM y : Arg(int)
 func move_check(id, x, y):
-	if in_bounds(Vector2(y.value,x.value), Variables.GRID_HEIGHT, Variables.GRID_WIDTH):
+	if in_bounds(Vector2(y, x), Variables.GRID_HEIGHT, Variables.GRID_WIDTH):
 		return true
 	return false
 
 #Checks whether the string is a valid command
 #PARAM string : Arg(String)
 func help_check(string):
-	if commands.has(string.value):
+	if commands.has(string):
 		return true
 	return false
 

@@ -264,7 +264,7 @@ func player_turn(string):
 	var command = Command.new(string)
 	var exception = call("exec_command", command)
 	if not exception == null:
-		$"..".exception(exception.get_exception())
+		$"..".exception(exception.get_description())
 
 #Insert a new entry into references
 func references_insert(node, type):
@@ -290,10 +290,10 @@ func exec_command(command):
 #PARAM y : Arg(Int)
 #PARAM type : Arg(String)
 func monster(x, y, type):
-	var pos = Vector2(x.value, y.value)
-	var monster = get("monster_"+type.value).instance()
+	var pos = Vector2(x, y)
+	var monster = get("monster_"+type).instance()
 	if spawn(monster, pos):
-		references_insert(monster, type.value)
+		references_insert(monster, type)
 func monster_check(x, y, type):
 	if not in_bounds(Vector2(x, y), GRID_WIDTH, GRID_HEIGHT):
 		return Exception.new(Enums.EXCEPTIONS.OUT_OF_RANGE)
@@ -306,13 +306,13 @@ func monster_check(x, y, type):
 #PARAM offset_x : Arg(Int)
 #PARAM offset_y : Arg(Int)
 func move(id, offset_x, offset_y):
-	var node = references[id.value]["node"]
+	var node = references[id]["node"]
 	var pos = get_map_index(node.position)
-	node.get_node("../").remove_node(node)
+	node.get_node("../").remove_child(node)
 	map[pos.y+offset_y][pos.x+offset_x].add_child(node)
 	return null
 func move_check(id, offset_x, offset_y):
-	if not in_bounds(references[id.value]["node"].position+Vector2(offset_x, offset_y), GRID_WIDTH, GRID_HEIGHT):
+	if not in_bounds(references[id]["node"].position+Vector2(offset_x, offset_y), GRID_WIDTH, GRID_HEIGHT):
 		return Exception.new(Enums.EXCEPTIONS.OUT_OF_RANGE)
 	if not references.has(id.value):
 		return Exception.new(Enums.EXCEPTIONS.UNKNOWN_REFERENCE)
