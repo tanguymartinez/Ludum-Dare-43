@@ -143,4 +143,5 @@ func id():
 		print_text("\t-monster:")
 		print_text("\t\tType :"+references[id]["type"])
 		print_text("\t\tId :"+str(id))
+		print_text("\t\tStatus :"+references[id]["status"])
 		print_text("")

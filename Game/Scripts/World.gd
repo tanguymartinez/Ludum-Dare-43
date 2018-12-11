@@ -270,7 +270,8 @@ func player_turn(string):
 func references_insert(node, type):
 	references[references.size()] = {
 		"node" : node,
-		"type" : type
+		"type" : type,
+		"status" : Enums.STATUS.IDLE
 	}
 
 func sync_world():
