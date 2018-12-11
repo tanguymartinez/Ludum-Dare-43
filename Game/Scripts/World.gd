@@ -313,12 +313,12 @@ func monster_check(x, y, type):
 #PARAM offset_y : Arg(Int)
 func move(id, offset_x, offset_y):
 	var node = references[id]["node"]
-	var pos = get_map_index(node.position)
+	var pos = get_map_index(node.get_node("../").position)
 	node.get_node("../").remove_child(node)
 	map[pos.y+offset_y][pos.x+offset_x].add_child(node)
 	return null
 func move_check(id, offset_x, offset_y):
-	if not in_bounds(references[id]["node"].position+Vector2(offset_x, offset_y), GRID_WIDTH, GRID_HEIGHT):
+	if not in_bounds(references[id]["node"].get_node("../").position+Vector2(offset_x, offset_y), GRID_WIDTH, GRID_HEIGHT):
 		return Exception.new(Enums.EXCEPTIONS.OUT_OF_RANGE)
 	if not references.has(id):
 		return Exception.new(Enums.EXCEPTIONS.UNKNOWN_REFERENCE)
