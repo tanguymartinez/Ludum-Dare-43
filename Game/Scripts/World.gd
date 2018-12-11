@@ -318,7 +318,7 @@ func move(id, offset_x, offset_y):
 	map[pos.y+offset_y][pos.x+offset_x].add_child(node)
 	return null
 func move_check(id, offset_x, offset_y):
-	if not in_bounds(references[id]["node"].get_node("../").position+Vector2(offset_x, offset_y), GRID_WIDTH, GRID_HEIGHT):
+	if not in_bounds(get_map_index(references[id]["node"].get_node("../").position)+Vector2(offset_x, offset_y), GRID_WIDTH, GRID_HEIGHT):
 		return Exception.new(Enums.EXCEPTIONS.OUT_OF_RANGE)
 	if not references.has(id):
 		return Exception.new(Enums.EXCEPTIONS.UNKNOWN_REFERENCE)
