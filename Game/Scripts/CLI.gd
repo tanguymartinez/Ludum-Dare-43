@@ -142,5 +142,5 @@ func id():
 	for id in references:
 		print_text("\t-monster:")
 		print_text("\t\tType :"+references[id]["type"])
-		print_text("\t\tId :"+id)
+		print_text("\t\tId :"+str(id))
 		print_text("")

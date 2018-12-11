@@ -34,9 +34,11 @@ func exception(exception):
 	rpc_id(1, "print_exception", exception)
 
 func sync_world():
-	var new_dict = $"World".references.duplicate()
-	for id in new_dict:
-		new_dict[id].erase("node")
+	var new_dict = {}
+	for id in $"World".references: #Deep copy
+		var new_dict2 = $"World".references[id].duplicate()
+		new_dict2.erase("node")
+		new_dict[id] = new_dict2
 	rpc_id(1, "sync_world", new_dict)
 
 #Transmit command to child node for treatment
