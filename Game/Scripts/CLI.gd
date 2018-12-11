@@ -11,7 +11,7 @@ var player_id
 var player_ip_address
 
 #Monsters related
-puppet var references = {
+var references = {
 	#id : {"node" : <node>, ...properties]
 }
 

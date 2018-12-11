@@ -34,7 +34,10 @@ func exception(exception):
 	rpc_id(1, "print_exception", exception)
 
 func sync_world():
-	rpc_id(1, "sync_world", $"World".references)
+	var new_dict = $"World".references.duplicate()
+	for id in new_dict:
+		new_dict[id].erase("node")
+	rpc_id(1, "sync_world", new_dict)
 
 #Transmit command to child node for treatment
 #PARAM command : Command
