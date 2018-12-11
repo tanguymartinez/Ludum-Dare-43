@@ -96,6 +96,7 @@ remote func cli_turn():
 
 remote func print_exception(exception):
 	print_text("[color=red]"+exception+"[/color]")
+	cli_turn()
 
 remote func sync_world(references):
 	self.references = references

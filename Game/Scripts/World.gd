@@ -265,6 +265,9 @@ func player_turn(string):
 	var exception = call("exec_command", command)
 	if not exception == null:
 		$"..".exception(exception.get_description())
+		end_turn()
+	else:
+		get_tree().paused = false
 
 #Insert a new entry into references
 func references_insert(node, type):
