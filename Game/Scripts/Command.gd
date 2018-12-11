@@ -7,7 +7,8 @@ const commands = {
 	"move" : [TYPE_INT, TYPE_INT, TYPE_INT, "move_check", "Moves the monster of id <id> of \"x y\" tiles", false],
 	"help" : [TYPE_STRING, "help_check", "Displays an insightful help message about the <command_name> you supplied as parameter", true],
 	"list" : ["list_check", "List all available commands", true],
-	"uname" : ["uname_check", "Displays the name of the host OS", true]
+	"uname" : ["uname_check", "Displays the name of the host OS", true],
+	"id" : ["id_check", "Display the list of monsters you summoned along with their ids", true]
 }
 var command setget ,get_command
 var args = [] setget ,get_args
@@ -63,33 +64,38 @@ func is_local():
 #Commands checks
 
 #Checks that supplied coordinates correspond to the map
-#PARAM x : Arg(int)
-#PARAM y : Arg(int)
-#PARAM type : Arg(String)
+#PARAM x : int
+#PARAM y : int
+#PARAM type : String
 func monster_check(x, y, type):
 	if in_bounds(Vector2(y, x), Variables.GRID_HEIGHT, Variables.GRID_WIDTH) and Enemy.MONSTERS.has(type):
 		return true
 	return false
 
 #Checks that supplied coordinates correspond to the map and that id is valid
-#PARAM id : Arg(int)
-#PARAM x : Arg(int)
-#PARAM y : Arg(int)
+#PARAM id : int
+#PARAM x : int
+#PARAM y : int
 func move_check(id, x, y):
 	if in_bounds(Vector2(y, x), Variables.GRID_HEIGHT, Variables.GRID_WIDTH):
 		return true
 	return false
 
 #Checks whether the string is a valid command
-#PARAM string : Arg(String)
+#PARAM string : String
 func help_check(string):
 	if commands.has(string):
 		return true
 	return false
 
 #Checks whether the command is valid
-#PARAM string : Arg(Nil)
 func list_check():
+	return true
+
+func id_check():
+	return true
+
+func uname_check():
 	return true
 
 #Checks whether the position supplied is in the grid of width <width> and height <height>

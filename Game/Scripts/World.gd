@@ -281,6 +281,7 @@ func exec_command(command):
 	match callv(command.command+"_check", command.args):
 		null:
 			callv(command.command, command.args)
+			rset_id(1, "references", references)
 			return null
 		var exception:
 			return exception

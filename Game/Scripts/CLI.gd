@@ -11,7 +11,7 @@ var player_id
 var player_ip_address
 
 #Game related
-var entities = [] #[id, node]
+var references = {}
 var playing
 
 func _ready():
@@ -128,3 +128,12 @@ func uname():
 	var os_name = OS.get_name()
 	print_text("Your OS is: " + os_name)
 	print_text("")
+
+#Display the list of monsters you summoned along with their ids
+func id():
+	print_text("List of monsters:")
+	for id in references:
+		print_text("\t-monster:")
+		print_text("\t\tType :"+references[id]["type"])
+		print_text("\t\tId :"+id)
+		print_text("")
