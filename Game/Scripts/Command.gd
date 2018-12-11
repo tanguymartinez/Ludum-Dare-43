@@ -77,9 +77,7 @@ func monster_check(x, y, type):
 #PARAM x : int
 #PARAM y : int
 func move_check(id, x, y):
-	if in_bounds(Vector2(y, x), Variables.GRID_HEIGHT, Variables.GRID_WIDTH):
-		return true
-	return false
+	return true
 
 #Checks whether the string is a valid command
 #PARAM string : String

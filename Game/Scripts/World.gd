@@ -271,7 +271,8 @@ func references_insert(node, type):
 	references[references.size()] = {
 		"node" : node,
 		"type" : type,
-		"status" : Enums.STATUS.IDLE
+		"status" : Enums.STATUS.IDLE,
+		"position" : get_map_index(node.position)
 	}
 
 func sync_world():

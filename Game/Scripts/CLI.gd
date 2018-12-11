@@ -95,7 +95,7 @@ remote func cli_turn():
 	$"GUI/Button".disabled = false
 
 remote func print_exception(exception):
-	print_text(exception)
+	print_text("[color=red]"+exception+"[/color]")
 
 remote func sync_world(references):
 	self.references = references
@@ -141,7 +141,8 @@ func id():
 	print_text("List of monsters:")
 	for id in references:
 		print_text("\t-monster:")
-		print_text("\t\tType: "+references[id]["type"])
 		print_text("\t\tId: "+str(id))
+		print_text("\t\tType: "+references[id]["type"])
 		print_text("\t\tStatus: "+Enums.STATUS.keys()[references[id]["status"]])
+		print_text("\t\tPosition: "+str(references[id]["position"]))
 		print_text("")
