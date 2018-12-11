@@ -273,6 +273,9 @@ func references_insert(node, type):
 		"type" : type
 	}
 
+func sync_world():
+	$"..".sync_world()
+
 #Commands
 
 #Execute standard command, you MUST call the checking function "<command_name>_check"
@@ -281,7 +284,7 @@ func exec_command(command):
 	match callv(command.command+"_check", command.args):
 		null:
 			callv(command.command, command.args)
-			rset_id(1, "references", references)
+			sync_world()
 			return null
 		var exception:
 			return exception

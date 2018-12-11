@@ -10,8 +10,12 @@ var text = []
 var player_id
 var player_ip_address
 
+#Monsters related
+puppet var references = {
+	#id : {"node" : <node>, ...properties]
+}
+
 #Game related
-var references = {}
 var playing
 
 func _ready():
@@ -92,6 +96,9 @@ remote func cli_turn():
 
 remote func print_exception(exception):
 	print_text(exception)
+
+remote func sync_world(references):
+	self.references = references
 
 #Local commands
 

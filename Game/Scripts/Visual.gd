@@ -33,6 +33,9 @@ func end_turn():
 func exception(exception):
 	rpc_id(1, "print_exception", exception)
 
+func sync_world():
+	rpc_id(1, "sync_world", $"World".references)
+
 #Transmit command to child node for treatment
 #PARAM command : Command
 remote func receive_command(command):
