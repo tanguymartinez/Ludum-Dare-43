@@ -131,14 +131,23 @@ func get_map_index(pos):
 func get_map_dir(dir):
 	return Vector2(dir.x/PIXELS, dir.y/PIXELS)
 
+#Determines if the specified tile contains a collider
+func collides(pos):
+	if not in_bounds(pos, GRID_HEIGHT, GRID_WIDTH):
+		return false
+	for node_tmp in map[pos.y][pos.x].get_children():
+		if Groups.blocking(node_tmp):
+			print("Can't spawn on colliding tile...")
+			return true
+	return false
+
 #Spawns <node> at the specified <pos> map location
 #PARAM pos: Vector2
 #RETURN bool
 func spawn(node, pos):
-	for node_tmp in map[pos.y][pos.x].get_children():
-		if Groups.blocking(node_tmp):
-			print("Can't spawn on colliding tile...")
-			return false
+	if collides(pos):
+		return false
+		print("Can't spawn on colliding tile!")
 	map[pos.y][pos.x].add_child(node)
 	return true
 
@@ -323,6 +332,8 @@ func move(id, offset_x, offset_y):
 func move_check(id, offset_x, offset_y):
 	if not in_bounds(get_map_index(references[id]["node"].get_node("../").position)+Vector2(offset_x, offset_y), GRID_WIDTH, GRID_HEIGHT):
 		return Exception.new(Enums.EXCEPTIONS.OUT_OF_RANGE)
+	if collides(get_map_index(references[id]["node"].get_node("../").position)+Vector2(offset_x, offset_y)):
+		return Exception.new(Enums.EXCEPTIONS.TILE_COLLIDES)
 	if not references.has(id):
 		return Exception.new(Enums.EXCEPTIONS.UNKNOWN_REFERENCE)
 	return null #Default
