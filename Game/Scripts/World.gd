@@ -150,7 +150,7 @@ func spawn(node, pos):
 		print("Can't spawn on colliding tile!")
 	map[pos.y][pos.x].add_child(node)
 	if node is Enemy:
-		references_insert(node, (node as Enemy).type)
+		references_insert(node, Enemy.TYPES.keys()[(node as Enemy).type])
 	return true
 
 #Moves the player of <dir> tiles
