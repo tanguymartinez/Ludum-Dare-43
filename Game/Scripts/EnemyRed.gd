@@ -1,4 +1,5 @@
+class_name EnemyRed
 extends "Enemy.gd"
 
 func _ready():
-	type = Enemy.TYPES.RED
+	set_type(Enemy.TYPES.RED)

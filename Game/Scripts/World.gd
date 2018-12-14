@@ -315,7 +315,7 @@ func monster(x, y, type):
 func monster_check(x, y, type):
 	if not in_bounds(Vector2(x, y), GRID_WIDTH, GRID_HEIGHT):
 		return Exception.new(Enums.EXCEPTIONS.OUT_OF_RANGE)
-	if not type in Enemy.MONSTERS:
+	if not type in Entity.MONSTERS:
 		return Exception.new(Enums.EXCEPTIONS.UNKNOWN_TYPE)
 	return null #Default
 

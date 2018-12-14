@@ -4,9 +4,10 @@
 [ext_resource path="res://Scripts/World.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Tiles/Tile.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Tiles/Overlay.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Tiles/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Tiles/Player_tmp.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Tiles/Hint.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Tiles/EnemyRed.tscn" type="PackedScene" id=7]
+
 
 [node name="Multiplayer" type="Node2D"]
 script = ExtResource( 1 )

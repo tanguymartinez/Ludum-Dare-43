@@ -24,6 +24,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Enemy.gd"
 }, {
+"base": "",
+"class": "EnemyRed",
+"language": "GDScript",
+"path": "res://Scripts/EnemyRed.gd"
+}, {
+"base": "AnimatedSprite",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://Scripts/Entity.gd"
+}, {
 "base": "Reference",
 "class": "Enums",
 "language": "GDScript",
@@ -39,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Groups.gd"
 }, {
+"base": "AnimatedSprite",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Scripts/Player.gd"
+}, {
 "base": "Node2D",
 "class": "Variables",
 "language": "GDScript",
@@ -48,9 +63,12 @@ _global_script_class_icons={
 "Argument": "",
 "Command": "",
 "Enemy": "",
+"EnemyRed": "",
+"Entity": "",
 "Enums": "",
 "Exception": "",
 "Groups": "",
+"Player": "",
 "Variables": ""
 }
 
