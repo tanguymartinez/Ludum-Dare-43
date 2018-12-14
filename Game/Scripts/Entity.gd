@@ -5,7 +5,7 @@ signal attack(sender, receiver, damage)
 
 export(int, 0, 100) var mana
 export(int, 0, 100) var hp
-var id
+var id setget set_id, get_id
 
 func _ready():
 	self.add_to_group(str(Enums.COLLIDER.ENEMY))
@@ -17,3 +17,9 @@ func _on_Attacked(hp):
 
 func attack(id, damage):
 	emit_signal("attack", self.id, id, damage)
+
+func set_id(id):
+	id = id
+
+func get_id():
+	return id
