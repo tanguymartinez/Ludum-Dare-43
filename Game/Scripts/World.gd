@@ -40,7 +40,7 @@ var player_instance
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player_instance = player.instance()
-	player_instance.find_node("Area2D").connect("player_clicked", self, "_on_Player_clicked")
+	player_instance.find_node("AnimatedSprite").connect("player_clicked", self, "_on_Player_clicked")
 	player_instance.find_node("GridContainer").connect("move_clicked", self, "_on_Move_clicked")
 	player_instance.find_node("GridContainer").connect("attack_clicked", self, "_on_Attack_clicked")
 	player_instance.find_node("GridContainer").connect("teleport_clicked", self, "_on_Teleport_clicked")
@@ -176,6 +176,7 @@ func remove_direction_hints():
 #PARAM length : int
 func generate_direction_hints(length):
 	var pos = get_map_index(player_instance.get_node("../").position)
+	print(pos)
 	for offset in direction_offsets:
 		for index in range(1, length+1):
 			var blocking = false
@@ -315,7 +316,7 @@ func monster(x, y, type):
 func monster_check(x, y, type):
 	if not in_bounds(Vector2(x, y), GRID_WIDTH, GRID_HEIGHT):
 		return Exception.new(Enums.EXCEPTIONS.OUT_OF_RANGE)
-	if not type in Entity.MONSTERS:
+	if not type in Enemy.MONSTERS:
 		return Exception.new(Enums.EXCEPTIONS.UNKNOWN_TYPE)
 	return null #Default
 

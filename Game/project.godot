@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Enemy.gd"
 }, {
-"base": "",
+"base": "AnimatedSprite",
 "class": "EnemyRed",
 "language": "GDScript",
 "path": "res://Scripts/EnemyRed.gd"
