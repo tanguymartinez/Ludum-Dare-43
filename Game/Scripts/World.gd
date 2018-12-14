@@ -150,7 +150,9 @@ func spawn(node, pos):
 		return false
 		print("Can't spawn on colliding tile!")
 	map[pos.y][pos.x].add_child(node)
+	node.connect("attack", self, "_on_Entity_attack")
 	if node is Enemy:
+		node.connect("enemy_clicked", self, "_on_Enemy_clicked")
 		references_insert(node, Enemy.TYPES.keys()[(node as Enemy).type])
 	return true
 
@@ -242,8 +244,10 @@ func _on_Attack_clicked():
 	toggle_hud()
 	if overlay_instance.texture != overlay_instance.attacking:
 		overlay_instance.texture = overlay_instance.attacking
+		player_instance.status = Enums.STATUS.ATTACKING
 	else:
 		overlay_instance.texture = overlay_instance.selecting
+		player_instance.status = Enums.STATUS.IDLE
 
 #Signal handler triggered when the teleport button is clicked
 func _on_Teleport_clicked():
@@ -252,6 +256,14 @@ func _on_Teleport_clicked():
 #Signal handler triggered when a hint is clicked
 func _on_Hint_clicked(pos):
 	move_player(pos)
+
+#Signal handler triggered when an enemy is clicked
+func _on_Enemy_clicked(pos, id):
+	if player_instance.state == Enums.STATUS.ATTACKING:
+		player_instance.attack(id)
+
+func _on_Entity_attack(sender, receiver, damage):
+	print("Entity #"+str(sender)+" attacked #"+str(receiver)+" of type "+references[sender]["type"]+", causing it "+damage+" HP loss")
 
 #Specify when it is the player's turn, casting CLI events onto the map first
 #PARAM command : Command
@@ -266,7 +278,7 @@ func player_turn(string):
 
 #Insert a new entry into references
 func references_insert(node, type):
-	node.id = references.size()
+	node.set_id(references.size())
 	references[references.size()] = {
 		"node" : node,
 		"type" : type,

@@ -50,8 +50,10 @@ extents = Vector2( 50, 50 )
 [node name="AnimatedSprite" parent="." instance=ExtResource( 1 )]
 frames = SubResource( 1 )
 animation = "idle"
-frame = 1
 script = ExtResource( 9 )
+mana = null
+hp = null
+damage = null
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite"]
 input_pickable = true

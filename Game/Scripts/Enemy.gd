@@ -3,6 +3,7 @@ extends "Entity.gd"
 
 #Signal emitted when an enemy is clicked
 #PARAM pos : Vector2
+#PARAM id: int
 signal enemy_clicked(pos, id)
 
 enum TYPES{RED, BLUE, GREEN,YELLOW}
@@ -21,4 +22,4 @@ func get_type():
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and Input.is_action_pressed("ui_click"):
-		emit_signal("enemy_clicked", self.get_node("../").position)
+		emit_signal("enemy_clicked", self.get_node("../").position, get_id())
