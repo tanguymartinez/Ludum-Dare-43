@@ -9,4 +9,5 @@ texture = ExtResource( 1 )
 centered = false
 script = ExtResource( 2 )
 attacking = ExtResource( 3 )
+selecting = ExtResource( 1 )
 

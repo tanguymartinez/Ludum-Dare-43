@@ -50,6 +50,7 @@ extents = Vector2( 50, 50 )
 [node name="AnimatedSprite" parent="." instance=ExtResource( 1 )]
 frames = SubResource( 1 )
 animation = "idle"
+frame = 1
 script = ExtResource( 9 )
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite"]

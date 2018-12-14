@@ -240,6 +240,10 @@ func _on_Move_clicked():
 #Signal handler triggered when the attack button clicked
 func _on_Attack_clicked():
 	toggle_hud()
+	if overlay_instance.texture != overlay_instance.attacking:
+		overlay_instance.texture = overlay_instance.attacking
+	else:
+		overlay_instance.texture = overlay_instance.selecting
 
 #Signal handler triggered when the teleport button is clicked
 func _on_Teleport_clicked():
