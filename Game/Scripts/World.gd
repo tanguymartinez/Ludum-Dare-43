@@ -149,6 +149,8 @@ func spawn(node, pos):
 		return false
 		print("Can't spawn on colliding tile!")
 	map[pos.y][pos.x].add_child(node)
+	if node is Enemy:
+		references_insert(node, (node as Enemy).type)
 	return true
 
 #Moves the player of <dir> tiles
@@ -176,7 +178,6 @@ func remove_direction_hints():
 #PARAM length : int
 func generate_direction_hints(length):
 	var pos = get_map_index(player_instance.get_node("../").position)
-	print(pos)
 	for offset in direction_offsets:
 		for index in range(1, length+1):
 			var blocking = false
@@ -281,6 +282,7 @@ func player_turn(string):
 
 #Insert a new entry into references
 func references_insert(node, type):
+	node.id = references.size()
 	references[references.size()] = {
 		"node" : node,
 		"type" : type,
@@ -311,8 +313,7 @@ func exec_command(command):
 func monster(x, y, type):
 	var pos = Vector2(x, y)
 	var monster = get("monster_"+type).instance()
-	if spawn(monster, pos):
-		references_insert(monster, type)
+	spawn(monster, pos)
 func monster_check(x, y, type):
 	if not in_bounds(Vector2(x, y), GRID_WIDTH, GRID_HEIGHT):
 		return Exception.new(Enums.EXCEPTIONS.OUT_OF_RANGE)
