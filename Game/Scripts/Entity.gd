@@ -10,13 +10,10 @@ var id
 func _ready():
 	self.add_to_group(str(Enums.COLLIDER.ENEMY))
 
-func attacked(hp):
+func _on_Attacked(hp):
 	self.hp -= hp
 	if self.hp <= 0:
 		self.queue_free()
 
 func attack(id, damage):
-	emit_signal("attack", id, damage)
-
-func move(dir):
-	pass
+	emit_signal("attack", self.id, id, damage)

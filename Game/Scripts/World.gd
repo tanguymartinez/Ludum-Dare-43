@@ -25,7 +25,6 @@ var references = {
 var files = []
 var tiles_scn = [] #TO-DO implement getter to remove duplicate duplicate
 var map = [] #map of actual node instances
-var tile_hovered = Vector2(0, 0)
 var direction_hints = [] #tiles showing where one can move
 var direction_offsets = [Vector2(-1, 0), Vector2(0, -1), Vector2(1, 0), Vector2(0, 1)] #offset from one's position, multiplicable
 #
@@ -36,6 +35,7 @@ var direction_offsets = [Vector2(-1, 0), Vector2(0, -1), Vector2(1, 0), Vector2(
 var player_instance
 
 #HUD logic
+var overlay_instance
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -57,7 +57,8 @@ func _ready():
 		instance.get_node("Sprite").z_index = -1
 		tiles_scn.append(instance)
 	init_map()
-	toggle_highlight_tile(Vector2(0,0))
+	overlay_instance = overlay.instance()
+	map[0][0].add_child(overlay_instance)
 
 #Generate map
 func init_map():
@@ -201,22 +202,9 @@ func generate_direction_hints(length):
 func tile_hovered(pos):
 	if in_bounds(pos, OS.get_screen_size().x, OS.get_screen_size().y):
 		var indexes = get_map_index(pos)
-		if tile_hovered != indexes:
-			toggle_highlight_tile(tile_hovered)
-			tile_hovered = indexes
-			toggle_highlight_tile(tile_hovered)
-
-#Toggles the selection tile at the specified map position
-#PARAM pos : Vector2
-func toggle_highlight_tile(pos):
-	if in_bounds(pos, map[0].size(), map.size()):
-		if map[pos.y][pos.x].has_node(overlay.instance().get_name()):
-			for node in map[pos.y][pos.x].get_children():
-				if node.get_name() == overlay.instance().get_name():
-					map[pos.y][pos.x].remove_child(node)
-					node.queue_free()
-		else:
-			map[pos.y][pos.x].add_child(overlay.instance())
+		if get_map_index(overlay_instance.get_node("../").position) != indexes:
+			overlay_instance.get_node("../").remove_child(overlay_instance)
+			map[indexes.y][indexes.x].add_child(overlay_instance)
 
 #Toggles HUD
 func toggle_hud():
@@ -252,18 +240,10 @@ func _on_Move_clicked():
 #Signal handler triggered when the attack button clicked
 func _on_Attack_clicked():
 	toggle_hud()
-#	if direction_hints.empty():
-#		generate_direction_hints(2)
-#	else:
-#		remove_direction_hints()
 
 #Signal handler triggered when the teleport button is clicked
 func _on_Teleport_clicked():
 	toggle_hud()
-#	if direction_hints.empty():
-#		generate_direction_hints(2)
-#	else:
-#		remove_direction_hints()
 
 #Signal handler triggered when a hint is clicked
 func _on_Hint_clicked(pos):
