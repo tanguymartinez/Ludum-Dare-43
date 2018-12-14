@@ -106,9 +106,12 @@ remote func sync_world(references):
 #Displays an insightful help message
 #PARAM string : Arg(String)
 func help(string):
-	var command = Command.new(string.value)
+	var command = Command.new(string)
 	var formatted_args = ""
-	for arg in command.args:
+	var args = []
+	for i in range(Command.commands[command.command].size()-3):
+		args.append(Argument.new(Command.commands[command.command][i]))
+	for arg in args:
 		formatted_args += str(arg.type_str)+", "
 	formatted_args = formatted_args.substr(0, formatted_args.length()-2) #Remove last hyphen
 	print_text("Command: "+command.command)
