@@ -29,7 +29,7 @@ func initialize(string):
 	var array = []
 	for i in range(ceil(float(string.length())/COLUMNS)): #Every line
 		array.append(string.substr(i*COLUMNS, COLUMNS))
-		if i%ROWS == 0 or (i == ceil(float(string.length())/COLUMNS)):
+		if array.size() == 3 or (i == ceil(float(string.length())/COLUMNS)):
 			blocks.append(array.duplicate())
 			array.clear()
 	anims.append(blocks.duplicate())
