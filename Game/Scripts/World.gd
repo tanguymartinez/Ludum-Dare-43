@@ -15,6 +15,7 @@ export(PackedScene) var monster_red
 export(PackedScene) var monster_blue
 export(PackedScene) var monster_yellow
 export(PackedScene) var monster_green
+export(PackedScene) var flag
 
 #Monsters related
 var references = {
@@ -268,7 +269,9 @@ func _on_Entity_attack(sender, receiver, damage):
 		print("Player attacked #"+str(receiver)+" of type "+references[receiver]["type"]+", causing it "+str(damage)+" HP loss")
 	else:
 		print("Entity #"+str(sender)+" attacked #"+str(receiver)+" of type "+references[receiver]["type"]+", causing it "+damage+" HP loss")
-	references[receiver]["node"].attacked(damage)
+	if references[receiver]["node"].attacked(damage):
+		references[receiver]["status"] = Enums.STATUS.DEAD
+		spawn(flag.instance(), references[receiver]["node"].get_node("../").position)
 
 #Specify when it is the player's turn, casting CLI events onto the map first
 #PARAM command : Command

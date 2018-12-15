@@ -17,7 +17,9 @@ func _ready():
 func attacked(hp):
 	self.hp -= hp
 	if self.hp <= 0:
-		self.queue_free()
+#		self.queue_free() #Would mess the references system since the references dict would resize
+		return true
+	return false
 
 func attack(id):
 	emit_signal("attack", self.id, id, damage)
