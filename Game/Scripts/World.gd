@@ -40,7 +40,7 @@ var overlay_instance
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player_instance = player.instance()
-	player_instance.find_node("AnimatedSprite").connect("player_clicked", self, "_on_Player_clicked")
+	player_instance.connect("player_clicked", self, "_on_Player_clicked")
 	player_instance.find_node("GridContainer").connect("move_clicked", self, "_on_Move_clicked")
 	player_instance.find_node("GridContainer").connect("attack_clicked", self, "_on_Attack_clicked")
 	player_instance.find_node("GridContainer").connect("teleport_clicked", self, "_on_Teleport_clicked")
@@ -150,7 +150,8 @@ func spawn(node, pos):
 		return false
 		print("Can't spawn on colliding tile!")
 	map[pos.y][pos.x].add_child(node)
-	node.connect("attack", self, "_on_Entity_attack")
+	if node is Entity:
+		node.connect("attack", self, "_on_Entity_attack")
 	if node is Enemy:
 		node.connect("enemy_clicked", self, "_on_Enemy_clicked")
 		references_insert(node, Enemy.TYPES.keys()[(node as Enemy).type])
@@ -244,10 +245,10 @@ func _on_Attack_clicked():
 	toggle_hud()
 	if overlay_instance.texture != overlay_instance.attacking:
 		overlay_instance.texture = overlay_instance.attacking
-		player_instance.status = Enums.STATUS.ATTACKING
+		player_instance.state = Enums.STATUS.ATTACKING
 	else:
 		overlay_instance.texture = overlay_instance.selecting
-		player_instance.status = Enums.STATUS.IDLE
+		player_instance.state = Enums.STATUS.IDLE
 
 #Signal handler triggered when the teleport button is clicked
 func _on_Teleport_clicked():
@@ -263,7 +264,11 @@ func _on_Enemy_clicked(pos, id):
 		player_instance.attack(id)
 
 func _on_Entity_attack(sender, receiver, damage):
-	print("Entity #"+str(sender)+" attacked #"+str(receiver)+" of type "+references[sender]["type"]+", causing it "+damage+" HP loss")
+	if sender == player_instance.id:
+		print("Player attacked #"+str(receiver)+" of type "+references[receiver]["type"]+", causing it "+str(damage)+" HP loss")
+	else:
+		print("Entity #"+str(sender)+" attacked #"+str(receiver)+" of type "+references[receiver]["type"]+", causing it "+damage+" HP loss")
+	references[receiver]["node"].attacked(damage)
 
 #Specify when it is the player's turn, casting CLI events onto the map first
 #PARAM command : Command
@@ -278,7 +283,7 @@ func player_turn(string):
 
 #Insert a new entry into references
 func references_insert(node, type):
-	node.set_id(references.size())
+	node.id = references.size()
 	references[references.size()] = {
 		"node" : node,
 		"type" : type,

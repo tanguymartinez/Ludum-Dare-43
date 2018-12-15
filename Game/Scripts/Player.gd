@@ -5,6 +5,7 @@ signal player_clicked()
 
 func _ready():
 	add_to_group(str(Enums.COLLIDER.ALLY))
+	id = -1
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and Input.is_action_pressed("ui_click"):

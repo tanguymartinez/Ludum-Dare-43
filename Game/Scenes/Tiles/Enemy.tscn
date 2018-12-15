@@ -9,9 +9,8 @@ extents = Vector2( 50, 50 )
 
 [node name="Enemy" index="0" instance=ExtResource( 1 )]
 animation = "Walking"
-frame = 1
 mana = null
-hp = null
+hp = 100
 damage = null
 
 [node name="Area2D" type="Area2D" parent="." index="0"]

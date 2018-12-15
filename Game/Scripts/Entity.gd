@@ -14,7 +14,7 @@ func _ready():
 	state = Enums.STATUS.IDLE
 	self.add_to_group(str(Enums.COLLIDER.ENEMY))
 
-func _on_Attacked(hp):
+func attacked(hp):
 	self.hp -= hp
 	if self.hp <= 0:
 		self.queue_free()
@@ -22,14 +22,14 @@ func _on_Attacked(hp):
 func attack(id):
 	emit_signal("attack", self.id, id, damage)
 
-func set_id(id):
-	id = id
+func set_id(id_arg):
+	id = id_arg
 
 func get_id():
 	return id
 
-func set_state(state):
-	if state in Enums.STATUS.keys():
-		self.state = state
+func set_state(s):
+	if s in range(Enums.STATUS.size()):
+		state = s
 func get_state():
 	return state

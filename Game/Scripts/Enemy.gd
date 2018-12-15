@@ -22,4 +22,4 @@ func get_type():
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and Input.is_action_pressed("ui_click"):
-		emit_signal("enemy_clicked", self.get_node("../").position, get_id())
+		emit_signal("enemy_clicked", self.get_node("../").position, id)
