@@ -13,7 +13,6 @@ var init_pos
 var end_pos
 var play = false
 var start
-var full_text
 
 func _ready():
 	height = rect_size.y
@@ -26,16 +25,15 @@ func _process(delta):
 
 func initialize(string):
 	##Init
-	full_text = string
-	var start = OS.get_ticks_msec()
 	blocks.clear()
 	var array = []
-	for i in range(ceil(float(full_text.length())/COLUMNS)): #Every line
-		array.append(full_text.substr(i*COLUMNS, COLUMNS))
-		if i%ROWS == 0 or (i == ceil(float(full_text.length())/COLUMNS)):
+	for i in range(ceil(float(string.length())/COLUMNS)): #Every line
+		array.append(string.substr(i*COLUMNS, COLUMNS))
+		if i%ROWS == 0 or (i == ceil(float(string.length())/COLUMNS)):
 			blocks.append(array.duplicate())
 			array.clear()
 	anims.append(blocks.duplicate())
+	update_display(0,0)
 
 func start(string):
 	if not start:
@@ -60,9 +58,18 @@ func next():
 		if anims_index == anims.size()-1:
 			anims.clear()
 			anims_index = 0
+			play = false
 		else:
 			anims_index += 1
 		blocks_index = 0
 	else:
 		blocks_index += 1
-	start = OS.get_ticks_msec()
+	if play:
+		update_display(anims_index, blocks_index)
+		start = OS.get_ticks_msec()
+
+func update_display(a_index, b_index):
+	var string = ""
+	for line in anims[a_index][b_index]:
+		string += line + "\n"
+	get_node("Label").text = string
