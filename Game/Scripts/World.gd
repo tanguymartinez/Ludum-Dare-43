@@ -28,15 +28,16 @@ var tiles_scn = [] #TO-DO implement getter to remove duplicate duplicate
 var map = [] #map of actual node instances
 var direction_hints = [] #tiles showing where one can move
 var direction_offsets = [Vector2(-1, 0), Vector2(0, -1), Vector2(1, 0), Vector2(0, 1)] #offset from one's position, multiplicable
-#
-##Referencing purposes
-#var ids = []
 
 #Player
 var player_instance
 
 #HUD logic
 var overlay_instance
+
+#Notifications purpose
+var lines = []
+var lines_index = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -219,6 +220,9 @@ func toggle_hud():
 func hud_visible():
 	return true if player_instance.find_node("Control").visible else false
 
+func notify(text):
+	pass
+
 #Checks whether the position supplied is in the grid of width <width> and height <height>
 #PARAM pos : Vector2
 #PARAM width : int
@@ -280,6 +284,7 @@ func _on_Entity_attack(sender, receiver, damage):
 #Specify when it is the player's turn, casting CLI events onto the map first
 #PARAM command : Command
 func player_turn(string):
+	get_node("../Control").animate("YAY")
 	var command = Command.new(string)
 	var exception = call("exec_command", command)
 	if not exception == null:
