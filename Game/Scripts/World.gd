@@ -290,8 +290,12 @@ func player_turn(string):
 		$"..".exception(exception.get_description())
 		end_turn()
 	else:
+		var formatted_args = ""
+		for arg in command.args:
+			formatted_args += str(arg) + " "
+		formatted_args = formatted_args.substr(0, formatted_args.length()-1) 
 		$"../Control".start("The researcher has issued a new command: ")
-		$"../Control".start(command.command)
+		$"../Control".start(command.command+" "+formatted_args)
 		get_tree().paused = false
 
 #Insert a new entry into references

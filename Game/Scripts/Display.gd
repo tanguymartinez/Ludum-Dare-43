@@ -70,7 +70,6 @@ func next():
 
 func update_display(a_index, b_index):
 	var string = ""
-	print(Vector2(a_index, b_index))
 	for line in anims[a_index][b_index]:
 		if not line.empty():
 			string += line + "\n"
