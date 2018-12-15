@@ -10,7 +10,8 @@ const description = [
 	"It's a shame to send something outside the map!",
 	"Hmmm, looks like this thingy you're trying to summon never existed!",
 	"Call to non-existent id!",
-	"Trying to move to a non-empty position!"
+	"Trying to move to a non-empty position!",
+	"Can't execute that action, the entity you selected is dead!"
 ]
 
 func _init(exception):
