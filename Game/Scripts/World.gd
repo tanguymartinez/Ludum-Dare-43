@@ -270,8 +270,12 @@ func _on_Entity_attack(sender, receiver, damage):
 	else:
 		print("Entity #"+str(sender)+" attacked #"+str(receiver)+" of type "+references[receiver]["type"]+", causing it "+damage+" HP loss")
 	if references[receiver]["node"].attacked(damage):
+		var pos = references[receiver]["node"].get_node("../").position
+		references[receiver]["node"].get_node("../").remove_child(references[receiver]["node"])
+		spawn(flag.instance(), pos)
 		references[receiver]["status"] = Enums.STATUS.DEAD
-		spawn(flag.instance(), references[receiver]["node"].get_node("../").position)
+	sync_world()
+	end_turn()
 
 #Specify when it is the player's turn, casting CLI events onto the map first
 #PARAM command : Command

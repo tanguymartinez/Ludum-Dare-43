@@ -147,6 +147,6 @@ func id():
 		print_text("\t-monster:")
 		print_text("\t\tId: "+str(id))
 		print_text("\t\tType: "+references[id]["type"])
-		print_text("\t\tStatus: "+Enums.STATUS.keys()[references[id]["status"]])
+		print_text("\t\tStatus: "+(("[color=red]"+Enums.STATUS.keys()[references[id]["status"]]+"[/color]") if references[id]["status"] == Enums.STATUS.DEAD else Enums.STATUS.keys()[references[id]]))
 		print_text("\t\tPosition: "+str(references[id]["position"]))
 		print_text("")
