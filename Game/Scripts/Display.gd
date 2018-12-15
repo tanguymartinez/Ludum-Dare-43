@@ -4,7 +4,6 @@ const COLUMNS = 24
 const ROWS = 3
 var anims = []
 var anims_index = 0
-var blocks = []
 var blocks_index = 0
 var height
 var duration = 3000.0
@@ -25,20 +24,21 @@ func _process(delta):
 
 func initialize(string):
 	##Init
-	blocks.clear()
+	var blocks = []
 	var array = []
 	for i in range(ceil(float(string.length())/COLUMNS)): #Every line
 		array.append(string.substr(i*COLUMNS, COLUMNS))
-		if array.size() == 3 or (i == ceil(float(string.length())/COLUMNS)):
+		if array.size() == ROWS or (i == ceil(float(string.length())/COLUMNS)-1):
 			blocks.append(array.duplicate())
 			array.clear()
 	anims.append(blocks.duplicate())
-	update_display(0,0)
+	blocks.clear()
 
 func start(string):
-	if not start:
+	if not play:
 		start = OS.get_ticks_msec()
 		initialize(string)
+		update_display(0,0)
 		play = true
 	else:
 		initialize(string)
@@ -54,7 +54,7 @@ func animate():
 		next()
 
 func next():
-	if blocks_index == blocks.size()-1:
+	if blocks_index == anims[anims_index].size()-1:
 		if anims_index == anims.size()-1:
 			anims.clear()
 			anims_index = 0
@@ -70,6 +70,8 @@ func next():
 
 func update_display(a_index, b_index):
 	var string = ""
+	print(Vector2(a_index, b_index))
 	for line in anims[a_index][b_index]:
-		string += line + "\n"
+		if not line.empty():
+			string += line + "\n"
 	get_node("Label").text = string

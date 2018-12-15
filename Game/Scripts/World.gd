@@ -290,6 +290,8 @@ func player_turn(string):
 		$"..".exception(exception.get_description())
 		end_turn()
 	else:
+		$"../Control".start("The researcher has issued a new command: ")
+		$"../Control".start(command.command)
 		get_tree().paused = false
 
 #Insert a new entry into references
