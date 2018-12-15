@@ -284,7 +284,7 @@ func _on_Entity_attack(sender, receiver, damage):
 #Specify when it is the player's turn, casting CLI events onto the map first
 #PARAM command : Command
 func player_turn(string):
-	get_node("../Control").animate("YAY")
+	get_node("../Control").animate("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent laoreet vitae nunc nec semper. Fusce eu neque est. Praesent in dictum enim. Aenean mollis malesuada nisi, sit amet auctor nisl. Nullam accumsan erat nibh, non tincidunt odio finibus vitae. In id neque faucibus, dictum felis vitae, lobortis nisi. Ut nec massa lacus. Nulla bibendum odio sed risus vehicula, id eleifend lorem blandit. Nunc sit amet eros eget odio tempus blandit. ")
 	var command = Command.new(string)
 	var exception = call("exec_command", command)
 	if not exception == null:
