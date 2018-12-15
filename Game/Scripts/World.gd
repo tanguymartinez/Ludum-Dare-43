@@ -340,6 +340,8 @@ func move(id, offset_x, offset_y):
 	map[pos.y+offset_y][pos.x+offset_x].add_child(node)
 	return null
 func move_check(id, offset_x, offset_y):
+	if references[id]["status"] == Enums.STATUS.DEAD:
+		return Exception.new(Enums.EXCEPTIONS.DEAD_ENTITY)
 	if not in_bounds(get_map_index(references[id]["node"].get_node("../").position)+Vector2(offset_x, offset_y), GRID_WIDTH, GRID_HEIGHT):
 		return Exception.new(Enums.EXCEPTIONS.OUT_OF_RANGE)
 	if collides(get_map_index(references[id]["node"].get_node("../").position)+Vector2(offset_x, offset_y)):
