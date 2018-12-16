@@ -276,7 +276,7 @@ func _on_Entity_attack(sender, receiver, damage):
 	if references[receiver]["node"].attacked(damage):
 		var pos = references[receiver]["node"].get_node("../").position
 		references[receiver]["node"].get_node("../").remove_child(references[receiver]["node"])
-		spawn(flag.instance(), pos)
+		spawn(flag.instance(), get_map_index(pos))
 		references[receiver]["status"] = Enums.STATUS.DEAD
 	sync_world()
 	end_turn()
