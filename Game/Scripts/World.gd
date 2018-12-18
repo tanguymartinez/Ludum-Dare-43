@@ -16,6 +16,7 @@ export(PackedScene) var monster_blue
 export(PackedScene) var monster_yellow
 export(PackedScene) var monster_green
 export(PackedScene) var flag
+export(PackedScene) var pavilion
 
 #Monsters related
 var references = {
@@ -278,8 +279,16 @@ func _on_Entity_attack(sender, receiver, damage):
 		references[receiver]["node"].get_node("../").remove_child(references[receiver]["node"])
 		spawn(flag.instance(), get_map_index(pos))
 		references[receiver]["status"] = Enums.STATUS.DEAD
+		player_instance.inc_conquered()
+		if player_instance.pavilion():
+			select_pavilion()
 	sync_world()
 	end_turn()
+
+func select_pavilion():
+	var pavilion = pavilion.instance()
+	pavilion.modulate = Color(1,1,1,0.5)
+	overlay_instance.add_child(pavilion)
 
 #Specify when it is the player's turn, casting CLI events onto the map first
 #PARAM command : Command

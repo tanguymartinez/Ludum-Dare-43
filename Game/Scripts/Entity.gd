@@ -14,6 +14,7 @@ func _ready():
 	state = Enums.STATUS.IDLE
 	self.add_to_group(str(Enums.COLLIDER.ENEMY))
 
+#Allows a unit to be attacked and therefore lose health and/or die
 func attacked(hp):
 	self.hp -= hp
 	if self.hp <= 0:

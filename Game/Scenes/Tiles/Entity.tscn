@@ -20,4 +20,7 @@ animation = "Idle"
 playing = true
 centered = false
 script = ExtResource( 3 )
+mana = null
+hp = null
+damage = null
 
