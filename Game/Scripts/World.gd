@@ -32,6 +32,7 @@ var direction_offsets = [Vector2(-1, 0), Vector2(0, -1), Vector2(1, 0), Vector2(
 
 #Player
 var player_instance
+var action
 
 #HUD logic
 var overlay_instance
@@ -42,6 +43,7 @@ var lines_index = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	action = Enums.ACTIONS.NONE
 	player_instance = player.instance()
 	player_instance.connect("player_clicked", self, "_on_Player_clicked")
 	player_instance.find_node("GridContainer").connect("move_clicked", self, "_on_Move_clicked")
@@ -169,10 +171,9 @@ func move_player(dir):
 		var map_dir = get_map_dir(dir)
 		player_instance.get_node("../").remove_child(player_instance)
 		map[map_index.y+map_dir.y][map_index.x+map_dir.x].add_child(player_instance)
-		remove_direction_hints()
-		end_turn()
 
 func end_turn():
+	action = Enums.ACTIONS.NONE
 	$"..".end_turn()
 
 #Hide and remove direction hints
@@ -245,6 +246,7 @@ func _on_Move_clicked():
 	toggle_hud()
 	if direction_hints.empty():
 		generate_direction_hints(2)
+		action = Enums.ACTIONS.MOVE
 
 #Signal handler triggered when the attack button clicked
 func _on_Attack_clicked():
@@ -262,7 +264,21 @@ func _on_Teleport_clicked():
 
 #Signal handler triggered when a hint is clicked
 func _on_Hint_clicked(pos):
-	move_player(pos)
+	match action:
+		Enums.ACTIONS.MOVE:
+			move_player(pos)
+		Enums.ACTIONS.PAVILION:
+			var pavilion_instance = overlay_instance.get_children()[0]
+			overlay_instance.remove_child(pavilion_instance)
+			pavilion_instance.modulate = Color(1,1,1,1)
+			var end_pos = get_map_index(player_instance.get_node("../").position)+get_map_index(pos)
+			spawn(pavilion_instance, end_pos)
+		_:
+			print("No action selected!")
+	remove_direction_hints()
+	action = Enums.ACTIONS.NONE
+	sync_world()
+	end_turn()
 
 #Signal handler triggered when an enemy is clicked
 func _on_Enemy_clicked(pos, id):
@@ -280,15 +296,19 @@ func _on_Entity_attack(sender, receiver, damage):
 		spawn(flag.instance(), get_map_index(pos))
 		references[receiver]["status"] = Enums.STATUS.DEAD
 		player_instance.inc_conquered()
+		overlay_instance.texture = overlay_instance.selecting #Switch back to selecting
 		if player_instance.pavilion():
+			action = Enums.ACTIONS.PAVILION
 			select_pavilion()
-	sync_world()
-	end_turn()
+	else:
+		sync_world()
+		end_turn()
 
 func select_pavilion():
-	var pavilion = pavilion.instance()
-	pavilion.modulate = Color(1,1,1,0.5)
-	overlay_instance.add_child(pavilion)
+	var pavilion_instance = pavilion.instance()
+	pavilion_instance.modulate = Color(1,1,1,0.5)
+	overlay_instance.add_child(pavilion_instance)
+	generate_direction_hints(1)
 
 #Specify when it is the player's turn, casting CLI events onto the map first
 #PARAM command : Command

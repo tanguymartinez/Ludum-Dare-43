@@ -3,7 +3,7 @@ extends "Entity.gd"
 
 signal player_clicked()
 
-const pavillon_treshold = 5
+const pavilion_treshold = 3
 var conquered setget set_conquered,get_conquered
 
 func _ready():
@@ -25,5 +25,5 @@ func inc_conquered():
 	conquered += 1
 
 func pavilion():
-	return true if conquered%5 == 0 else false
+	return true if (conquered%pavilion_treshold == 0 and conquered != 0) else false
 
