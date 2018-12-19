@@ -284,8 +284,10 @@ func _on_Hint_clicked(pos):
 func _on_Enemy_clicked(pos, id):
 	if player_instance.state == Enums.STATUS.ATTACKING:
 		player_instance.attack(id)
+		player_instance.state = Enums.STATUS.IDLE
 
 func _on_Entity_attack(sender, receiver, damage):
+	var must_select = false
 	if sender == player_instance.id:
 		print("Player attacked #"+str(receiver)+" of type "+references[receiver]["type"]+", causing it "+str(damage)+" HP loss")
 	else:
@@ -300,7 +302,8 @@ func _on_Entity_attack(sender, receiver, damage):
 		if player_instance.pavilion():
 			action = Enums.ACTIONS.PAVILION
 			select_pavilion()
-	else:
+			must_select = true
+	if not must_select:
 		sync_world()
 		end_turn()
 
